@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler Varacchi | Lead Technical Artist</title>
+    
+    <!-- 
+    =====================================================================
+    PORTFOLIO TEMPLATE - Based on analysis of 28 Senior+ Technical Artists
+    =====================================================================
+    
+    STRUCTURE:
+    1. HERO - Name, title, metric, contact links, hero visual
+    2. WORK GRID - 6 project thumbnails (GIF recommended)
+    3. PROJECT MODALS - Click-through detail pages
+    4. SKILLS - Tiered (Expert/Professional/Familiar)
+    5. ABOUT - Bio, education, validation
+    6. FOOTER - Contact info
+    
+    TO CUSTOMIZE:
+    - Replace [PLACEHOLDER] text with your content
+    - Replace placeholder images/videos with your assets
+    - Update colors in :root CSS variables
+    - Add your actual project content in the modals
+    
+    WIX TRANSLATION NOTES:
+    - Each section = Wix Strip/Section
+    - Grid = Wix Pro Gallery or Repeater
+    - Modals = Wix Lightbox
+    - CSS variables = Wix Theme Colors
+    =====================================================================
+    -->
+    
+    <!-- Google Fonts - Using distinctive fonts per skill guidelines -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 
+        =====================================================================
+        CSS VARIABLES - Edit these to change the entire color scheme
+        WIX: These map to Theme Colors in Wix Editor
+        =====================================================================
+        */
+        :root {
+            /* Background colors - Dark theme (89% of TAs use dark) */
+            --bg-primary: #09090b;      /* Zinc 950 - Main background */
+            --bg-secondary: #18181b;    /* Zinc 900 - Cards, sections */
+            --bg-tertiary: #27272a;     /* Zinc 800 - Borders, dividers */
+            
+            /* Text colors */
+            --text-primary: #fafafa;    /* Zinc 50 - Headers */
+            --text-secondary: #a1a1aa;  /* Zinc 400 - Body text */
+            --text-muted: #71717a;      /* Zinc 500 - Captions, labels */
+            
+            /* Accent colors */
+            --accent-primary: #3b82f6;  /* Blue 500 - Links, buttons */
+            --accent-hover: #60a5fa;    /* Blue 400 - Hover states */
+            --accent-success: #22c55e;  /* Green 500 - Success states */
+            --accent-warning: #f59e0b;  /* Amber 500 - NDA/locked items */
+            
+            /* Typography */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Spacing */
+            --section-padding: 80px;
+            --container-max: 1200px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 300ms ease;
+        }
+        
+        /* 
+        =====================================================================
+        RESET & BASE STYLES
+        =====================================================================
+        */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-display);
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        
+        a:hover {
+            color: var(--accent-hover);
+        }
+        
+        img, video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Container utility */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Section utility */
+        .section {
+            padding: var(--section-padding) 0;
+        }
+        
+        /* Section labels - 96% of TAs use these */
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 1: HERO
+        - Name prominently displayed (100% of TAs)
+        - Title + Specialization (96% of TAs)
+        - Quantified metric (36% - but yours is strong)
+        - Contact links (89% of TAs)
+        - Hero visual (71% of TAs)
+        
+        WIX: Use a full-width Strip with text elements and buttons
+        =====================================================================
+        */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 0 80px;
+            position: relative;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-name {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        
+        .hero-title {
+            font-size: clamp(18px, 3vw, 24px);
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+        
+        /* Metric highlight - makes 232M stand out */
+        .hero-title .metric {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 48px;
+        }
+        
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+        
+        .hero-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+        }
+        
+        .hero-link svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Hero visual - GIF or video recommended */
+        .hero-visual {
+            margin-top: 48px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--bg-tertiary);
+            aspect-ratio: 16/9;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+        
+        .hero-visual video,
+        .hero-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Placeholder styling - remove when adding real content */
+        .placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-family: var(--font-mono);
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 2: WORK GRID
+        - Grid layout (82% of TAs)
+        - GIF thumbnails (96% of TAs) - CRITICAL
+        - 16:9 aspect ratio (75% of TAs)
+        - Title + Role per card (96% of TAs)
+        - Lock icon for NDA (21% of TAs)
+        
+        WIX: Use Pro Gallery with custom hover or Repeater with columns
+        =====================================================================
+        */
+        .work-section {
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        @media (max-width: 900px) {
+            .work-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .work-card {
+            cursor: pointer;
+            transition: transform var(--transition-normal);
+        }
+        
+        .work-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        .work-thumbnail {
+            aspect-ratio: 16/9;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            margin-bottom: 16px;
+            position: relative;
+            transition: border-color var(--transition-fast);
+        }
+        
+        .work-card:hover .work-thumbnail {
+            border-color: var(--text-muted);
+        }
+        
+        .work-thumbnail img,
+        .work-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Lock icon for NDA/password-protected work */
+        .work-thumbnail .lock-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .work-thumbnail .lock-badge svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-warning);
+        }
+        
+        .work-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .work-card-role {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 3: PROJECT MODALS
+        - Hero video per project (71% of TAs)
+        - Role + Duration + Team Size (68% of TAs)
+        - Tools listed (96% of TAs)
+        - Problem/Solution structure (54% of TAs)
+        - Quantified results (36% - underused but powerful)
+        
+        WIX: Use Lightbox element with custom content
+        =====================================================================
+        */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 40px 24px;
+        }
+        
+        .modal-overlay.active {
+            display: block;
+        }
+        
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 16px;
+            border: 1px solid var(--bg-tertiary);
+            overflow: hidden;
+        }
+        
+        .modal-close {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            z-index: 1001;
+        }
+        
+        .modal-close:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .modal-hero {
+            aspect-ratio: 16/9;
+            background: var(--bg-secondary);
+        }
+        
+        .modal-hero video,
+        .modal-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .modal-body {
+            padding: 40px;
+        }
+        
+        .modal-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .modal-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--bg-tertiary);
+        }
+        
+        .modal-meta-item {
+            font-size: 14px;
+        }
+        
+        .modal-meta-label {
+            color: var(--text-muted);
+            margin-right: 8px;
+        }
+        
+        .modal-meta-value {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .modal-section {
+            margin-bottom: 32px;
+        }
+        
+        .modal-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .modal-section-content {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        /* Results metrics grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .result-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        /* Process images gallery */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        @media (max-width: 600px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .process-item {
+            aspect-ratio: 1;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .process-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .process-caption {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-family: var(--font-mono);
+        }
+        
+        /* Tools list */
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .tool-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+        }
+        
+        /* 
+        =====================================================================
+        PASSWORD MODAL
+        - 21% of TAs use password protection for NDA work
+        - Client-side only (not real security, just NDA compliance)
+        
+        WIX: Use Lightbox with input element
+        =====================================================================
+        */
+        .password-modal {
+            max-width: 400px;
+        }
+        
+        .password-modal .modal-body {
+            text-align: center;
+        }
+        
+        .password-modal .modal-title {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .password-modal p {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .password-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+        
+        .password-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--bg-tertiary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        
+        .password-hint {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 4: SKILLS
+        - Tiered skill levels (57% of TAs)
+        - Software + Skills separated (64% of TAs)
+        - Production tools included (71% of TAs)
+        - NO skill bars (89% don't use them - they're amateur)
+        
+        WIX: Use text elements with styled lists
+        =====================================================================
+        */
+        .skills-section {
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+        
+        .skill-category {
+            margin-bottom: 24px;
+        }
+        
+        .skill-tier {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .skill-list {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .skill-list span {
+            color: var(--text-muted);
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 5: ABOUT + EDUCATION
+        - 2-3 sentence bio (82% of TAs)
+        - Current focus stated (54% of TAs)
+        - Education with GPA (43% - only if high)
+        - External validation (89% of TAs)
+        - Resume PDF download (75% of TAs)
+        
+        WIX: Use text elements and button for download
+        =====================================================================
+        */
+        .about-section {
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 64px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+        
+        .about-bio {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        
+        .about-bio strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .about-current {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        .resume-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background var(--transition-fast);
+        }
+        
+        .resume-button:hover {
+            background: var(--accent-hover);
+            color: white;
+        }
+        
+        .education-item {
+            margin-bottom: 16px;
+        }
+        
+        .education-degree {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .education-school {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .validation-list {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--bg-tertiary);
+        }
+        
+        .validation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .validation-item svg {
+            width: 16px;
+            height: 16px;
+            color: var(--accent-success);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+        
+        /* 
+        =====================================================================
+        SECTION 6: FOOTER
+        - Email visible (71% of TAs) - not a form
+        - Location stated (54% of TAs)
+        - Social links (89% of TAs)
+        
+        WIX: Use Strip with text and icon buttons
+        =====================================================================
+        */
+        .footer {
+            border-top: 1px solid var(--bg-tertiary);
+            padding: 48px 0;
+            text-align: center;
+        }
+        
+        .footer-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .footer-email {
+            font-size: 16px;
+            color: var(--accent-primary);
+            margin-bottom: 24px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .footer-link {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .footer-link:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--text-muted);
+        }
+        
+        .footer-link svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .footer-location {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .footer-copyright {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+    =====================================================================
+    HERO SECTION
+    WIX: Full-width Strip, anchor name "home"
+    =====================================================================
+    -->
+    <section class="hero section" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <!-- Name - 100% of TAs display prominently -->
+                <h1 class="hero-name">Tyler Varacchi</h1>
+                
+                <!-- Title with quantified metric - 96% have title, 36% quantify -->
+                <p class="hero-title">
+                    Lead Technical Artist · Mocap Systems · <span class="metric">232M+ Views Shipped</span>
+                </p>
+                
+                <!-- Contact links - 89% of TAs include in hero -->
+                <div class="hero-links">
+                    <a href="mailto:[EMAIL]" class="hero-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        Email
+                    </a>
+                    <a href="[LINKEDIN_URL]" class="hero-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="[GITHUB_URL]" class="hero-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        GitHub
+                    </a>
+                    <a href="[RESUME_PDF_URL]" class="hero-link" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        Resume
+                    </a>
+                </div>
+                
+                <!-- Hero visual - 71% use motion content -->
+                <div class="hero-visual">
+                    <!-- REPLACE: Add your best mocap GIF or video here -->
+                    <!-- Recommended: 3-5 second loop, 1920x1080, under 5MB -->
+                    <div class="placeholder">
+                        [HERO VIDEO/GIF: Best mocap moment, 3-5 sec loop]
+                    </div>
+                    <!-- Example with actual video:
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/hero-reel.mp4" type="video/mp4">
+                    </video>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 
+    =====================================================================
+    WORK GRID SECTION
+    WIX: Strip with Pro Gallery or Repeater, anchor name "work"
+    =====================================================================
+    -->
+    <section class="work-section section" id="work">
+        <div class="container">
+            <p class="section-label">Selected Work</p>
+            
+            <div class="work-grid">
+                <!-- 
+                PROJECT 1: SuperPlastic Pipeline
+                Your anchor piece - most recognizable
+                -->
+                <div class="work-card" onclick="openModal('superplastic')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: GIF of Janky/Guggimon performing -->
+                        <div class="placeholder">[GIF: Mocap character performance]</div>
+                    </div>
+                    <h3 class="work-card-title">SuperPlastic Real-Time Pipeline</h3>
+                    <p class="work-card-role">Lead Technical Artist · 232M views</p>
+                </div>
+                
+                <!-- 
+                PROJECT 2: StoryboardTo3D
+                AI angle - hot topic right now
+                Note: Teaser until Jan 31 embargo lifts
+                -->
+                <div class="work-card" onclick="openModal('storyboard')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: GIF of plugin in action or before/after -->
+                        <div class="placeholder">[GIF: Storyboard → 3D scene]</div>
+                    </div>
+                    <h3 class="work-card-title">StoryboardTo3D</h3>
+                    <p class="work-card-role">AI Research · SIGGRAPH Recommended</p>
+                </div>
+                
+                <!-- 
+                PROJECT 3: Burlington Sculpture
+                Real-world impact - PASSWORD PROTECTED
+                -->
+                <div class="work-card" onclick="openPasswordModal('burlington')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: Render of sculpture visualization -->
+                        <div class="placeholder">[IMAGE: Sculpture render]</div>
+                        <!-- Lock badge for NDA/password content -->
+                        <div class="lock-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="work-card-title">Burlington Public Sculpture</h3>
+                    <p class="work-card-role">3D Visualization · Built</p>
+                </div>
+                
+                <!-- 
+                PROJECT 4: Nike Shoes
+                Brand recognition - PASSWORD PROTECTED
+                -->
+                <div class="work-card" onclick="openPasswordModal('nike')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: Render of shoe (if allowed under NDA) -->
+                        <div class="placeholder">[IMAGE: Product render]</div>
+                        <div class="lock-badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
+                        </div>
+                    </div>
+                    <h3 class="work-card-title">VictorVictor × Nike</h3>
+                    <p class="work-card-role">Product Visualization · NDA</p>
+                </div>
+                
+                <!-- 
+                PROJECT 5: AI Mocap Pipeline
+                Shows current technical thinking
+                -->
+                <div class="work-card" onclick="openModal('ai-mocap')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: GIF of AI character in mocap -->
+                        <div class="placeholder">[GIF: AI → Rigged → Mocap]</div>
+                    </div>
+                    <h3 class="work-card-title">AI Character to Mocap</h3>
+                    <p class="work-card-role">Workflow R&D · 1-Hour Pipeline</p>
+                </div>
+                
+                <!-- 
+                PROJECT 6: Robot Voice Game
+                Shows range beyond mocap
+                -->
+                <div class="work-card" onclick="openModal('robot')">
+                    <div class="work-thumbnail">
+                        <!-- REPLACE: Screenshot or GIF of gameplay -->
+                        <div class="placeholder">[GIF: Voice-controlled gameplay]</div>
+                    </div>
+                    <h3 class="work-card-title">Voice-Controlled Combat</h3>
+                    <p class="work-card-role">Unity Game · Novel Input</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 
+    =====================================================================
+    SKILLS SECTION
+    WIX: Strip with text columns, anchor name "skills"
+    =====================================================================
+    -->
+    <section class="skills-section section" id="skills">
+        <div class="container">
+            <p class="section-label">Skills</p>
+            
+            <div class="skills-grid">
+                <div>
+                    <!-- Tiered skills - 57% of TAs do this -->
+                    <div class="skill-category">
+                        <p class="skill-tier">Expert</p>
+                        <p class="skill-list">
+                            Unreal Engine 5 <span>·</span> 
+                            Maya <span>·</span> 
+                            Xsens Motion Capture <span>·</span> 
+                            Faceware <span>·</span> 
+                            Real-Time Pipeline Development
+                        </p>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <p class="skill-tier">Professional</p>
+                        <p class="skill-list">
+                            Python <span>·</span> 
+                            C++ (AnimNodes) <span>·</span> 
+                            Character Rigging <span>·</span> 
+                            Shaders <span>·</span> 
+                            Substance Painter
+                        </p>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <p class="skill-tier">Familiar</p>
+                        <p class="skill-list">
+                            Houdini <span>·</span> 
+                            Unity <span>·</span> 
+                            ZBrush <span>·</span> 
+                            After Effects <span>·</span>
+                            Blender
+                        </p>
+                    </div>
+                </div>
+                
+                <div>
+                    <!-- Production tools - 71% include these -->
+                    <div class="skill-category">
+                        <p class="skill-tier">Production</p>
+                        <p class="skill-list">
+                            Perforce <span>·</span> 
+                            Shotgun <span>·</span> 
+                            Jira <span>·</span> 
+                            Git <span>·</span>
+                            Confluence
+                        </p>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <p class="skill-tier">Specializations</p>
+                        <p class="skill-list">
+                            Motion Capture Systems <span>·</span>
+                            Pipeline Automation <span>·</span>
+                            Real-Time Rendering <span>·</span>
+                            Team Leadership <span>·</span>
+                            AI Integration
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 
+    =====================================================================
+    ABOUT SECTION
+    WIX: Strip with text columns, anchor name "about"
+    =====================================================================
+    -->
+    <section class="about-section section" id="about">
+        <div class="container">
+            <p class="section-label">About</p>
+            
+            <div class="about-grid">
+                <div>
+                    <!-- Bio - 82% keep it 2-3 sentences -->
+                    <p class="about-bio">
+                        <strong>Technical Artist with 4 years of production experience.</strong> 
+                        Built the real-time mocap pipeline at SuperPlastic that shipped 200+ videos 
+                        to 232M views. Led a team of 10 artists through a complete Maya/RenderMan 
+                        to Unreal Engine 5 pipeline transition.
+                    </p>
+                    
+                    <!-- Current focus - 54% state this -->
+                    <p class="about-current">
+                        Currently focused on AI-assisted content creation workflows. 
+                        Looking for Technical Artist or Creative Technologist roles. 
+                        Open to relocation.
+                    </p>
+                    
+                    <!-- Resume download - 75% include this -->
+                    <a href="[RESUME_PDF_URL]" class="resume-button" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download Resume
+                    </a>
+                </div>
+                
+                <div>
+                    <!-- Education - 43% show GPA if high -->
+                    <p class="section-label" style="margin-top: 0;">Education</p>
+                    
+                    <div class="education-item">
+                        <p class="education-degree">M.S. Digital Media</p>
+                        <p class="education-school">Drexel University · 3.97 GPA · 2025</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <p class="education-degree">B.A. Art</p>
+                        <p class="education-school">University of Vermont · 2022</p>
+                    </div>
+                    
+                    <!-- Validation - 89% show external proof -->
+                    <div class="validation-list">
+                        <p class="section-label">Validation</p>
+                        
+                        <div class="validation-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                            Thesis recommended for SIGGRAPH 2026
+                        </div>
+                        
+                        <div class="validation-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                            Original research: AI Score Hallucination
+                        </div>
+                        
+                        <div class="validation-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                            1M YouTube subscribers in 1 month (SuperPlastic)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 
+    =====================================================================
+    FOOTER
+    WIX: Strip with text and social icons, anchor name "contact"
+    =====================================================================
+    -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p class="footer-name">Tyler Varacchi</p>
+            <p class="footer-email">
+                <a href="mailto:[EMAIL]">[EMAIL]</a>
+            </p>
+            
+            <!-- Social links - 89% include these -->
+            <div class="footer-links">
+                <a href="[LINKEDIN_URL]" class="footer-link" target="_blank" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+                <a href="[GITHUB_URL]" class="footer-link" target="_blank" title="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                </a>
+                <a href="[VIMEO_URL]" class="footer-link" target="_blank" title="Vimeo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.64c-.09 2-.63 4.78-2.79 8.14-2.23 3.5-4.12 5.25-5.68 5.25-1.56 0-2.88-1.44-3.96-4.33-.72-2.64-1.44-5.29-2.16-7.93-.8-2.89-1.66-4.33-2.58-4.33-.2 0-.9.42-2.1 1.26L2 5.64c2.19-1.93 4.04-3.62 5.55-5.07 2.51-2.06 4.39-3.13 5.64-3.22 2.96-.29 4.78 1.74 5.46 6.08.73 4.67 1.24 7.58 1.52 8.71.85 3.86 1.78 5.78 2.79 5.78.79 0 1.97-1.25 3.54-3.74 1.57-2.49 2.41-4.38 2.52-5.68.22-2.14-.62-3.22-2.53-3.22-1.22 0-2.48.4-3.77 1.2.09-2.96 1.55-5.13 4.38-6.52"/></svg>
+                </a>
+            </div>
+            
+            <!-- Location - 54% state this -->
+            <p class="footer-location">Burlington, VT · Open to relocation</p>
+            <p class="footer-copyright">© 2026 Tyler Varacchi</p>
+        </div>
+    </footer>
+    
+    <!-- 
+    =====================================================================
+    PROJECT MODALS
+    WIX: Create separate Lightboxes for each project
+    =====================================================================
+    -->
+    
+    <!-- MODAL: SuperPlastic -->
+    <div class="modal-overlay" id="modal-superplastic">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <!-- REPLACE: 15-30 sec highlight reel -->
+                <div class="placeholder">[VIDEO: SuperPlastic highlight reel, 15-30 sec]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">SuperPlastic Real-Time Pipeline</h2>
+                
+                <!-- Meta info - 68% include role/duration/team -->
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">Lead Technical Artist</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Duration:</span>
+                        <span class="modal-meta-value">4 years (2019-2023)</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Team:</span>
+                        <span class="modal-meta-value">10 artists</span>
+                    </div>
+                </div>
+                
+                <!-- Problem/Solution - 54% use this structure -->
+                <div class="modal-section">
+                    <p class="modal-section-title">The Problem</p>
+                    <p class="modal-section-content">
+                        SuperPlastic needed to produce high-volume animated content for YouTube Shorts 
+                        but was bottlenecked by 4-hour RenderMan renders per shot. Traditional offline 
+                        rendering couldn't scale to social media's pace.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Solution</p>
+                    <p class="modal-section-content">
+                        Built end-to-end real-time mocap pipeline in Unreal Engine 5. Integrated Xsens 
+                        body tracking and Faceware facial capture with custom C++ AnimNodes for runtime 
+                        retargeting. Reduced turnaround from 4 hours to 5 minutes per shot.
+                    </p>
+                </div>
+                
+                <!-- Quantified results - 36% do this but it's powerful -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Results</p>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <p class="result-value">232M</p>
+                            <p class="result-label">Total Views</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">200+</p>
+                            <p class="result-label">Videos Shipped</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">1M</p>
+                            <p class="result-label">Subs in 1 Month</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">48×</p>
+                            <p class="result-label">Faster Renders</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Process images - 71% show these -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Process</p>
+                    <div class="process-grid">
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Mocap capture session</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Xsens body tracking</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">UE5 real-time render</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Final output</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tools - 96% list these -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Unreal Engine 5</span>
+                        <span class="tool-tag">Xsens MVN</span>
+                        <span class="tool-tag">Faceware</span>
+                        <span class="tool-tag">Maya</span>
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">C++</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL: StoryboardTo3D -->
+    <div class="modal-overlay" id="modal-storyboard">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <div class="placeholder">[VIDEO: Plugin demo, storyboard → 3D scene]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">StoryboardTo3D</h2>
+                
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">Sole Developer & Researcher</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Context:</span>
+                        <span class="modal-meta-value">MS Thesis, Drexel University</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Status:</span>
+                        <span class="modal-meta-value">SIGGRAPH 2026 Recommended</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Problem</p>
+                    <p class="modal-section-content">
+                        3D previs requires skilled artists to manually translate storyboards into scenes. 
+                        This bottleneck delays production, especially for small teams. Can AI automate 
+                        spatial positioning from hand-drawn storyboards?
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Solution</p>
+                    <p class="modal-section-content">
+                        Built StoryboardTo3D, a UE5.6 plugin that uses vision-language models to iteratively 
+                        position 3D assets based on storyboard analysis. Compared Claude, GPT-4o, and LLaVA 
+                        across 36 test scenarios with expert validation.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Key Finding: AI Score Hallucination</p>
+                    <p class="modal-section-content">
+                        Discovered a 37% gap between AI self-reported confidence and actual expert-validated 
+                        success rates. GPT-4o claimed 84% success while achieving 17% actual accuracy. 
+                        Claude Sonnet showed near-perfect calibration. This finding has implications for 
+                        any AI system using self-assessment as a termination signal.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Results</p>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <p class="result-value">37%</p>
+                            <p class="result-label">Calibration Gap</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">83%</p>
+                            <p class="result-label">Claude Accuracy</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">36</p>
+                            <p class="result-label">Test Scenarios</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">3</p>
+                            <p class="result-label">VLMs Compared</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Unreal Engine 5.6</span>
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Claude API</span>
+                        <span class="tool-tag">GPT-4o API</span>
+                        <span class="tool-tag">LLaVA</span>
+                        <span class="tool-tag">Depth-Anything-V2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL: AI Mocap Pipeline -->
+    <div class="modal-overlay" id="modal-ai-mocap">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <div class="placeholder">[VIDEO: Full workflow, concept → mocap-ready character]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">AI Character to Mocap Pipeline</h2>
+                
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">Developer</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Type:</span>
+                        <span class="modal-meta-value">Workflow R&D</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Time:</span>
+                        <span class="modal-meta-value">~1 Hour End-to-End</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Problem</p>
+                    <p class="modal-section-content">
+                        Traditional character pipelines (concept → model → rig → mocap setup) take 
+                        days to weeks. Small teams and indie developers can't afford this for 
+                        prototyping or rapid content creation.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Solution</p>
+                    <p class="modal-section-content">
+                        Developed a workflow using AI-assisted modeling (Rodin AI) combined with 
+                        automatic rigging to produce mocap-ready characters with dynamics (tail simulation) 
+                        in approximately one hour. Demonstrated full integration with Xsens capture system.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Rodin AI</span>
+                        <span class="tool-tag">Unreal Engine 5</span>
+                        <span class="tool-tag">Xsens MVN</span>
+                        <span class="tool-tag">Auto-Rigging</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL: Robot Game -->
+    <div class="modal-overlay" id="modal-robot">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <div class="placeholder">[VIDEO: Gameplay showing voice commands]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Voice-Controlled Robot Combat</h2>
+                
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">Developer</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Context:</span>
+                        <span class="modal-meta-value">Drexel University</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Engine:</span>
+                        <span class="modal-meta-value">Unity</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Challenge</p>
+                    <p class="modal-section-content">
+                        Create a game with novel interaction that doesn't rely on traditional 
+                        controller input. Explore voice as a primary input method for real-time 
+                        gameplay.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Solution</p>
+                    <p class="modal-section-content">
+                        Built a robot combat game controlled entirely through voice commands. 
+                        Player issues verbal orders to their robot during battle (move, attack, 
+                        defend). Demonstrates interaction design thinking beyond traditional inputs.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Unity</span>
+                        <span class="tool-tag">Voice Recognition API</span>
+                        <span class="tool-tag">C#</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 
+    =====================================================================
+    PASSWORD MODAL
+    WIX: Lightbox with input field and buttons
+    =====================================================================
+    -->
+    <div class="modal-overlay" id="modal-password">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content password-modal">
+            <div class="modal-body">
+                <h2 class="modal-title">Password Protected</h2>
+                <p>This work is under NDA. Enter password to view.</p>
+                
+                <input 
+                    type="password" 
+                    id="password-input" 
+                    class="password-input" 
+                    placeholder="Enter password"
+                    onkeypress="if(event.key === 'Enter') checkPassword()"
+                >
+                
+                <div class="password-buttons">
+                    <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="checkPassword()">Submit</button>
+                </div>
+                
+                <p class="password-hint">
+                    Password available in resume or upon request.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL: Burlington (Password Protected) -->
+    <div class="modal-overlay" id="modal-burlington">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <div class="placeholder">[IMAGE: Sculpture visualization in environment]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Burlington Public Sculpture</h2>
+                
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">3D Visualization Artist</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Client:</span>
+                        <span class="modal-meta-value">Studio Projects</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Status:</span>
+                        <span class="modal-meta-value">Approved & Built</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Project</p>
+                    <p class="modal-section-content">
+                        Converted artist sketches into photorealistic 3D sculpture visualization 
+                        placed in realistic downtown Burlington environment. Visualization was 
+                        presented to city council and approved for construction. The sculpture 
+                        has since been fabricated and installed.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Process</p>
+                    <div class="process-grid">
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Original sketch</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">3D model</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Environment comp</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Final installed</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Maya</span>
+                        <span class="tool-tag">Substance Painter</span>
+                        <span class="tool-tag">Photoshop</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL: Nike (Password Protected) -->
+    <div class="modal-overlay" id="modal-nike">
+        <button class="modal-close" onclick="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <div class="modal-content">
+            <div class="modal-hero">
+                <div class="placeholder">[IMAGE: Shoe visualization - hero angle]</div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">VictorVictor × Nike</h2>
+                
+                <div class="modal-meta">
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Role:</span>
+                        <span class="modal-meta-value">3D Visualization Artist</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Client:</span>
+                        <span class="modal-meta-value">VictorVictor</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="modal-meta-label">Status:</span>
+                        <span class="modal-meta-value">In Development</span>
+                    </div>
+                </div>
+                
+                <p style="background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); padding: 12px 16px; border-radius: 8px; font-size: 13px; color: var(--accent-warning); margin-bottom: 24px;">
+                    ⚠️ Work shown under NDA. Please do not distribute.
+                </p>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">The Project</p>
+                    <p class="modal-section-content">
+                        Graphic designer working on a VictorVictor × Nike footwear collaboration 
+                        needed to evaluate designs before production. 2D mockups weren't representing 
+                        material behavior accurately. Created photorealistic 3D renders showing 
+                        materials (leather, mesh, rubber, metallic elements) from multiple angles 
+                        for internal design review.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Deliverables</p>
+                    <div class="process-grid">
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Hero angle</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Side profile</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Detail shot</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[IMG]</div>
+                            </div>
+                            <p class="process-caption">Alt colorway</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Tools</p>
+                    <div class="tools-list">
+                        <span class="tool-tag">Maya</span>
+                        <span class="tool-tag">Substance Painter</span>
+                        <span class="tool-tag">Marmoset Toolbag</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 
+    =====================================================================
+    JAVASCRIPT
+    WIX: Lightbox open/close is handled by Wix's built-in functionality
+    =====================================================================
+    -->
+    <script>
+        // Track which protected modal to open after password
+        let pendingModal = null;
+        
+        // Password for protected content
+        // CHANGE THIS to your actual password
+        const PORTFOLIO_PASSWORD = 'portfolio2026';
+        
+        // Open a regular modal
+        function openModal(modalId) {
+            document.getElementById('modal-' + modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Open password modal, then protected content
+        function openPasswordModal(modalId) {
+            pendingModal = modalId;
+            document.getElementById('modal-password').classList.add('active');
+            document.getElementById('password-input').value = '';
+            document.getElementById('password-input').focus();
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Check password and open protected modal
+        function checkPassword() {
+            const input = document.getElementById('password-input').value;
+            
+            if (input === PORTFOLIO_PASSWORD) {
+                closeModal();
+                setTimeout(() => {
+                    openModal(pendingModal);
+                }, 100);
+            } else {
+                // Shake animation for wrong password
+                const passwordModal = document.querySelector('.password-modal');
+                passwordModal.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    passwordModal.style.animation = '';
+                }, 500);
+            }
+        }
+        
+        // Close any open modal
+        function closeModal() {
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.body.style.overflow = '';
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+        
+        // Close modal on overlay click (not content)
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+        });
+    </script>
+    
+    <!-- Shake animation for wrong password -->
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+    </style>
+</body>
+</html>
