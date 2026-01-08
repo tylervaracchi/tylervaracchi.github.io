@@ -406,6 +406,68 @@
             background: var(--bg-secondary);
         }
         
+        /* Portrait hero for 9:16 content (TikTok/Shorts) */
+        .modal-hero.portrait {
+            aspect-ratio: auto;
+            max-height: 70vh;
+            display: flex;
+            justify-content: center;
+            background: var(--bg-primary);
+        }
+        
+        .modal-hero.portrait .portrait-video-container {
+            aspect-ratio: 9/16;
+            height: 70vh;
+            max-width: 100%;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .modal-hero.portrait iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Portrait grid for shipped examples */
+        .portrait-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        
+        .portrait-item {
+            aspect-ratio: 9/16;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--bg-tertiary);
+            transition: transform var(--transition-fast), border-color var(--transition-fast);
+            display: block;
+        }
+        
+        .portrait-item:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-primary);
+        }
+        
+        .portrait-item img,
+        .portrait-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .portrait-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
         .modal-hero video,
         .modal-hero img {
             width: 100%;
@@ -518,12 +580,21 @@
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--bg-tertiary);
+            position: relative;
         }
         
         .process-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        
+        .process-item iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         
         .process-caption {
@@ -880,19 +951,19 @@
                 
                 <!-- Contact links - 89% of TAs include in hero -->
                 <div class="hero-links">
-                    <a href="mailto:[EMAIL]" class="hero-link">
+                    <a href="mailto:tylervaracchi@gmail.com" class="hero-link">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         Email
                     </a>
-                    <a href="[LINKEDIN_URL]" class="hero-link" target="_blank">
+                    <a href="https://www.linkedin.com/in/tyler-varacchi" class="hero-link" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         LinkedIn
                     </a>
-                    <a href="[GITHUB_URL]" class="hero-link" target="_blank">
+                    <a href="https://github.com/tylervaracchi" class="hero-link" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                         GitHub
                     </a>
-                    <a href="[RESUME_PDF_URL]" class="hero-link" target="_blank">
+                    <a href="Tyler_Varacchi_Resume.pdf" class="hero-link" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                         Resume
                     </a>
@@ -932,8 +1003,8 @@
                 -->
                 <div class="work-card" onclick="openModal('superplastic')">
                     <div class="work-thumbnail">
-                        <!-- REPLACE: GIF of Janky/Guggimon performing -->
-                        <div class="placeholder">[GIF: Mocap character performance]</div>
+                        <!-- REPLACE: Square crop from portrait video (center crop 9:16 → 1:1) -->
+                        <div class="placeholder">[GIF: Square crop from portrait reel]</div>
                     </div>
                     <h3 class="work-card-title">SuperPlastic Real-Time Pipeline</h3>
                     <p class="work-card-role">Lead Technical Artist · 232M views</p>
@@ -955,16 +1026,12 @@
                 
                 <!-- 
                 PROJECT 3: Burlington Sculpture
-                Real-world impact - PASSWORD PROTECTED
+                Real-world impact - PUBLIC
                 -->
-                <div class="work-card" onclick="openPasswordModal('burlington')">
+                <div class="work-card" onclick="openModal('burlington')">
                     <div class="work-thumbnail">
                         <!-- REPLACE: Render of sculpture visualization -->
                         <div class="placeholder">[IMAGE: Sculpture render]</div>
-                        <!-- Lock badge for NDA/password content -->
-                        <div class="lock-badge">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
-                        </div>
                     </div>
                     <h3 class="work-card-title">Burlington Public Sculpture</h3>
                     <p class="work-card-role">3D Visualization · Built</p>
@@ -1104,10 +1171,10 @@
                 <div>
                     <!-- Bio - 82% keep it 2-3 sentences -->
                     <p class="about-bio">
-                        <strong>Technical Artist with 4 years of production experience.</strong> 
-                        Built the real-time mocap pipeline at SuperPlastic that shipped 200+ videos 
-                        to 232M views. Led a team of 10 artists through a complete Maya/RenderMan 
-                        to Unreal Engine 5 pipeline transition.
+                        <strong>Technical Artist with 4+ years of production experience.</strong> 
+                        Built the real-time mocap pipeline at SuperPlastic that shipped 256+ videos 
+                        to 232M views (1M subscribers in one month). 
+                        Led 8 artists from offline to real-time UE5 rendering.
                     </p>
                     
                     <!-- Current focus - 54% state this -->
@@ -1118,7 +1185,7 @@
                     </p>
                     
                     <!-- Resume download - 75% include this -->
-                    <a href="[RESUME_PDF_URL]" class="resume-button" target="_blank">
+                    <a href="Tyler_Varacchi_Resume.pdf" class="resume-button" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                         Download Resume
                     </a>
@@ -1156,6 +1223,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
                             1M YouTube subscribers in 1 month (SuperPlastic)
                         </div>
+                        
+                        <div class="validation-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                            Guest Lecturer, UVM (2 semesters, 36 students)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1172,19 +1244,22 @@
         <div class="container">
             <p class="footer-name">Tyler Varacchi</p>
             <p class="footer-email">
-                <a href="mailto:[EMAIL]">[EMAIL]</a>
+                <a href="mailto:tylervaracchi@gmail.com">tylervaracchi@gmail.com</a>
             </p>
             
             <!-- Social links - 89% include these -->
             <div class="footer-links">
-                <a href="[LINKEDIN_URL]" class="footer-link" target="_blank" title="LinkedIn">
+                <a href="https://www.linkedin.com/in/tyler-varacchi" class="footer-link" target="_blank" title="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
-                <a href="[GITHUB_URL]" class="footer-link" target="_blank" title="GitHub">
+                <a href="https://github.com/tylervaracchi" class="footer-link" target="_blank" title="GitHub">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                 </a>
-                <a href="[VIMEO_URL]" class="footer-link" target="_blank" title="Vimeo">
+                <a href="https://vimeo.com/989623886" class="footer-link" target="_blank" title="Vimeo">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.64c-.09 2-.63 4.78-2.79 8.14-2.23 3.5-4.12 5.25-5.68 5.25-1.56 0-2.88-1.44-3.96-4.33-.72-2.64-1.44-5.29-2.16-7.93-.8-2.89-1.66-4.33-2.58-4.33-.2 0-.9.42-2.1 1.26L2 5.64c2.19-1.93 4.04-3.62 5.55-5.07 2.51-2.06 4.39-3.13 5.64-3.22 2.96-.29 4.78 1.74 5.46 6.08.73 4.67 1.24 7.58 1.52 8.71.85 3.86 1.78 5.78 2.79 5.78.79 0 1.97-1.25 3.54-3.74 1.57-2.49 2.41-4.38 2.52-5.68.22-2.14-.62-3.22-2.53-3.22-1.22 0-2.48.4-3.77 1.2.09-2.96 1.55-5.13 4.38-6.52"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@tylervaracchi9413" class="footer-link" target="_blank" title="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
                 </a>
             </div>
             
@@ -1207,9 +1282,14 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
-            <div class="modal-hero">
-                <!-- REPLACE: 15-30 sec highlight reel -->
-                <div class="placeholder">[VIDEO: SuperPlastic highlight reel, 15-30 sec]</div>
+            <div class="modal-hero portrait">
+                <div class="portrait-video-container">
+                    <iframe src="https://player.vimeo.com/video/989623886?badge=0&autopause=0&player_id=0&app_id=58479" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                            title="SuperPlastic Demo Reel">
+                    </iframe>
+                </div>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">SuperPlastic Real-Time Pipeline</h2>
@@ -1222,11 +1302,11 @@
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Duration:</span>
-                        <span class="modal-meta-value">4 years (2019-2023)</span>
+                        <span class="modal-meta-value">~2 years (Mar 2022 - Dec 2023)</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Team:</span>
-                        <span class="modal-meta-value">10 artists</span>
+                        <span class="modal-meta-value">8 artists</span>
                     </div>
                 </div>
                 
@@ -1243,9 +1323,19 @@
                 <div class="modal-section">
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
-                        Built end-to-end real-time mocap pipeline in Unreal Engine 5. Integrated Xsens 
-                        body tracking and Faceware facial capture with custom C++ AnimNodes for runtime 
-                        retargeting. Reduced turnaround from 4 hours to 5 minutes per shot.
+                        Built end-to-end real-time mocap pipeline in Unreal Engine 5. Managed mocap lab 
+                        (Xsens + Faceware) with weekly capture sessions and 2 actors. Wrote a custom 
+                        C++ AnimNode for runtime retargeting when Maya's deformers came into UE5 broken — 
+                        live mocap ran without lag or crashes. Reduced turnaround from 4 hours to 5 minutes per shot.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Technical Highlight: C++ AnimNode</p>
+                    <p class="modal-section-content">
+                        Maya's custom rig deformers couldn't export to UE5. Rather than rebuild the rig, 
+                        wrote engine-level C++ to handle runtime retargeting. This kept the animation team's 
+                        existing Maya workflow intact while enabling real-time preview in-engine.
                     </p>
                 </div>
                 
@@ -1258,7 +1348,7 @@
                             <p class="result-label">Total Views</p>
                         </div>
                         <div class="result-card">
-                            <p class="result-value">200+</p>
+                            <p class="result-value">256+</p>
                             <p class="result-label">Videos Shipped</p>
                         </div>
                         <div class="result-card">
@@ -1278,27 +1368,34 @@
                     <div class="process-grid">
                         <div>
                             <div class="process-item">
-                                <div class="placeholder">[IMG]</div>
+                                <img src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
                             </div>
-                            <p class="process-caption">Mocap capture session</p>
+                            <p class="process-caption">Xsens body capture</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <div class="placeholder">[IMG]</div>
+                                <img src="assets/superplastic/sp-process-2.jpg" alt="Tyler wearing Faceware facial capture headset">
                             </div>
-                            <p class="process-caption">Xsens body tracking</p>
+                            <p class="process-caption">Faceware face capture</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <div class="placeholder">[IMG]</div>
+                                <iframe title="Super Plastic Mocap Room" 
+                                        frameborder="0" 
+                                        allowfullscreen 
+                                        mozallowfullscreen="true" 
+                                        webkitallowfullscreen="true" 
+                                        allow="autoplay; fullscreen; xr-spatial-tracking" 
+                                        src="https://sketchfab.com/models/8c884225bcad4811bb9d242964c2be8c/embed?ui_theme=dark">
+                                </iframe>
                             </div>
-                            <p class="process-caption">UE5 real-time render</p>
+                            <p class="process-caption">Mocap studio (3D scan)</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <div class="placeholder">[IMG]</div>
+                                <div class="placeholder">[Pipeline Diagram - Mermaid]</div>
                             </div>
-                            <p class="process-caption">Final output</p>
+                            <p class="process-caption">Pipeline architecture</p>
                         </div>
                     </div>
                 </div>
@@ -1313,6 +1410,28 @@
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Python</span>
                         <span class="tool-tag">C++</span>
+                    </div>
+                </div>
+                
+                <!-- Shipped Examples - portrait format (9:16 for TikTok/Shorts) -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Shipped Examples</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        256+ videos shipped for YouTube Shorts & TikTok (9:16 portrait format)
+                    </p>
+                    <div class="portrait-grid">
+                        <a href="https://www.youtube.com/shorts/f9Lhn6EM5A8" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-1.jpg" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/Nn6riDhaMbQ" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-2.jpg" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/fN0294VS6b4" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-3.jpg" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/u_x_vxBqex8" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-4.jpg" alt="SuperPlastic YouTube Short">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1331,6 +1450,11 @@
             <div class="modal-body">
                 <h2 class="modal-title">StoryboardTo3D</h2>
                 
+                <!-- SIGGRAPH Badge -->
+                <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; display: inline-block;">
+                    <span style="color: white; font-weight: 600; font-size: 14px;">📄 SIGGRAPH 2026 Submission Pending</span>
+                </div>
+                
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
@@ -1338,11 +1462,11 @@
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Context:</span>
-                        <span class="modal-meta-value">MS Thesis, Drexel University</span>
+                        <span class="modal-meta-value">MS Thesis, Drexel University (3.97 GPA)</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Status:</span>
-                        <span class="modal-meta-value">SIGGRAPH 2026 Recommended</span>
+                        <span class="modal-meta-value">Committee Recommended for SIGGRAPH</span>
                     </div>
                 </div>
                 
@@ -1350,41 +1474,23 @@
                     <p class="modal-section-title">The Problem</p>
                     <p class="modal-section-content">
                         3D previs requires skilled artists to manually translate storyboards into scenes. 
-                        This bottleneck delays production, especially for small teams. Can AI automate 
-                        spatial positioning from hand-drawn storyboards?
+                        This bottleneck delays production, especially for small teams.
                     </p>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
-                        Built StoryboardTo3D, a UE5.6 plugin that uses vision-language models to iteratively 
-                        position 3D assets based on storyboard analysis. Compared Claude, GPT-4o, and LLaVA 
+                        Built a UE5 plugin that uses vision-language models to automatically 
+                        position 3D assets based on storyboard analysis. Compared multiple VLMs 
                         across 36 test scenarios with expert validation.
                     </p>
                 </div>
                 
+                <!-- Results -->
                 <div class="modal-section">
-                    <p class="modal-section-title">Key Finding: AI Score Hallucination</p>
-                    <p class="modal-section-content">
-                        Discovered a 37% gap between AI self-reported confidence and actual expert-validated 
-                        success rates. GPT-4o claimed 84% success while achieving 17% actual accuracy. 
-                        Claude Sonnet showed near-perfect calibration. This finding has implications for 
-                        any AI system using self-assessment as a termination signal.
-                    </p>
-                </div>
-                
-                <div class="modal-section">
-                    <p class="modal-section-title">Results</p>
+                    <p class="modal-section-title">Research Scope</p>
                     <div class="results-grid">
-                        <div class="result-card">
-                            <p class="result-value">37%</p>
-                            <p class="result-label">Calibration Gap</p>
-                        </div>
-                        <div class="result-card">
-                            <p class="result-value">83%</p>
-                            <p class="result-label">Claude Accuracy</p>
-                        </div>
                         <div class="result-card">
                             <p class="result-value">36</p>
                             <p class="result-label">Test Scenarios</p>
@@ -1393,19 +1499,58 @@
                             <p class="result-value">3</p>
                             <p class="result-label">VLMs Compared</p>
                         </div>
+                        <div class="result-card">
+                            <p class="result-value">83%</p>
+                            <p class="result-label">Best Accuracy</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">1</p>
+                            <p class="result-label">Novel Finding</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Before/After Section -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Example Output</p>
+                    <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[INPUT: Storyboard]</div>
+                            </div>
+                            <p class="process-caption">Input storyboard</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <div class="placeholder">[OUTPUT: 3D Scene]</div>
+                            </div>
+                            <p class="process-caption">Generated 3D scene</p>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
-                        <span class="tool-tag">Unreal Engine 5.6</span>
+                        <span class="tool-tag">Unreal Engine 5</span>
                         <span class="tool-tag">Python</span>
                         <span class="tool-tag">Claude API</span>
                         <span class="tool-tag">GPT-4o API</span>
                         <span class="tool-tag">LLaVA</span>
                         <span class="tool-tag">Depth-Anything-V2</span>
                     </div>
+                </div>
+                
+                <div class="modal-section" style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <p class="modal-section-content" style="color: var(--text-muted); font-size: 13px; margin: 0;">
+                        <strong style="color: var(--text-secondary);">Novel finding withheld</strong> pending SIGGRAPH 2026 submission. 
+                        Happy to discuss in interviews.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Thesis Abstract</p>
+                    <a href="https://researchdiscovery.drexel.edu/esploro/outputs/graduate/AI-powered-storyboard-to-3D-scene-generation/991022138782104721" target="_blank" style="color: var(--accent-primary); font-size: 14px;">View on Drexel University Library →</a>
                 </div>
             </div>
         </div>
@@ -1792,14 +1937,5 @@
             });
         });
     </script>
-    
-    <!-- Shake animation for wrong password -->
-    <style>
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-    </style>
 </body>
 </html>
