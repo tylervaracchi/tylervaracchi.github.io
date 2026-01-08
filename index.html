@@ -1324,18 +1324,20 @@
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
                         Built end-to-end real-time mocap pipeline in Unreal Engine 5. Managed mocap lab 
-                        (Xsens + Faceware) with weekly capture sessions and 2 actors. Wrote a custom 
-                        C++ AnimNode for runtime retargeting when Maya's deformers came into UE5 broken — 
-                        live mocap ran without lag or crashes. Reduced turnaround from 4 hours to 5 minutes per shot.
+                        (Manus gloves, Xsens suit, Faceware) with weekly capture sessions and 2 actors. 
+                        Wrote a custom C++ AnimNode that handled full-body and face retargeting at runtime. 
+                        Reduced turnaround from 4 hours to 5 minutes per shot.
                     </p>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">Technical Highlight: C++ AnimNode</p>
                     <p class="modal-section-content">
-                        Maya's custom rig deformers couldn't export to UE5. Rather than rebuild the rig, 
-                        wrote engine-level C++ to handle runtime retargeting. This kept the animation team's 
-                        existing Maya workflow intact while enabling real-time preview in-engine.
+                        Maya rigs had 20+ bones per limb — impossible to export cleanly to UE5. Built a 
+                        custom engine-level AnimNode that handled body retargeting, face retargeting, 
+                        finger jitter correction, and bone locking. Also built a morph target library 
+                        for facial expressions beyond Faceware's capture range, keeping characters on-model. 
+                        Same node supported both live mocap streaming and baked Maya animation playback.
                     </p>
                 </div>
                 
@@ -1365,7 +1367,7 @@
                 <!-- Process images - 71% show these -->
                 <div class="modal-section">
                     <p class="modal-section-title">Process</p>
-                    <div class="process-grid">
+                    <div class="process-grid" style="grid-template-columns: repeat(3, 1fr);">
                         <div>
                             <div class="process-item">
                                 <img src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
@@ -1391,13 +1393,13 @@
                             </div>
                             <p class="process-caption">Mocap studio (3D scan)</p>
                         </div>
-                        <div>
-                            <div class="process-item">
-                                <div class="placeholder">[Pipeline Diagram - Mermaid]</div>
-                            </div>
-                            <p class="process-caption">Pipeline architecture</p>
-                        </div>
                     </div>
+                </div>
+                
+                <!-- Pipeline Diagram - Full width -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Pipeline Architecture</p>
+                    <img src="assets/superplastic/sp-pipeline.png" alt="SuperPlastic Mocap to Unreal Pipeline" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                 </div>
                 
                 <!-- Tools - 96% list these -->
@@ -1406,6 +1408,7 @@
                     <div class="tools-list">
                         <span class="tool-tag">Unreal Engine 5</span>
                         <span class="tool-tag">Xsens MVN</span>
+                        <span class="tool-tag">Manus</span>
                         <span class="tool-tag">Faceware</span>
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Python</span>
@@ -1756,11 +1759,7 @@
                             <div class="process-item">
                                 <div class="placeholder">[IMG]</div>
                             </div>
-                            <p class="process-caption">3D model</p>
-                        </div>
-                        <div>
-                            <div class="process-item">
-                                <div class="placeholder">[IMG]</div>
+                            <p class="process-captio[IMG]</div>
                             </div>
                             <p class="process-caption">Environment comp</p>
                         </div>
@@ -1930,7 +1929,7 @@
             if (e.key === 'Escape') closeModal();
         });
         
-        // Close modal on overlay click (not content)
+        // Close modal on overlay click
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) closeModal();
