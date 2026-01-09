@@ -1937,8 +1937,14 @@
         
         // Open a regular modal
         function openModal(modalId) {
-            document.getElementById('modal-' + modalId).classList.add('active');
+            const modal = document.getElementById('modal-' + modalId);
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Ensure videos play (autoplay can be blocked after interactions)
+            modal.querySelectorAll('video').forEach(video => {
+                video.play().catch(() => {}); // Catch and ignore if blocked
+            });
         }
         
         // Open password modal, then protected content
@@ -1971,7 +1977,7 @@
         
         // Close any open modal
         function closeModal() {
-            document.querySelectorAll('.modal-overlay').forEach(modal => {
+            document.querySelectorAll('.modal-overlay.active').forEach(modal => {
                 // Stop and reset videos
                 modal.querySelectorAll('video').forEach(video => {
                     video.pause();
