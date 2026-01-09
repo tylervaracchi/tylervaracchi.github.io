@@ -370,7 +370,7 @@
         }
         
         .modal-content {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: var(--bg-primary);
             border-radius: 16px;
@@ -929,6 +929,61 @@
             font-size: 12px;
             color: var(--text-muted);
         }
+        
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            cursor: zoom-out;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 50%;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .zoomable {
+            cursor: zoom-in;
+            transition: transform 0.2s;
+        }
+        
+        .zoomable:hover {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 <body>
@@ -1340,6 +1395,69 @@
                     </p>
                 </div>
                 
+                <!-- Pipeline Diagram - Full width -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Pipeline Architecture</p>
+                    <img src="assets/superplastic/sp-pipeline.png" alt="SuperPlastic Mocap Pipeline: Capture devices (Faceware, Xsens, Manus) through Live Link to custom C++ Retarget Node in Unreal Engine" style="width: 100%; border-radius: 8px;">
+                </div>
+                
+                <!-- Process images - 71% show these -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Process</p>
+                    <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div>
+                            <div class="process-item">
+                                <img src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
+                            </div>
+                            <p class="process-caption">Xsens body capture</p>
+                        </div>
+                        <div>
+                            <div class="process-item">
+                                <img src="assets/superplastic/sp-process-2.jpeg" alt="Tyler wearing Faceware facial capture headset">
+                            </div>
+                            <p class="process-caption">Faceware face capture</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mocap Studio 3D Scan - Full width -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Mocap Studio (3D Scan)</p>
+                    <div style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--bg-tertiary);">
+                        <iframe title="Super Plastic Mocap Room" 
+                                frameborder="0" 
+                                allowfullscreen 
+                                mozallowfullscreen="true" 
+                                webkitallowfullscreen="true" 
+                                allow="autoplay; fullscreen; xr-spatial-tracking" 
+                                src="https://sketchfab.com/models/8c884225bcad4811bb9d242964c2be8c/embed?ui_theme=dark&autostart=1&autospin=0.2"
+                                style="width: 100%; height: 100%;">
+                        </iframe>
+                    </div>
+                </div>
+                
+                <!-- Shipped Examples - portrait format (9:16 for TikTok/Shorts) -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Shipped Examples</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        256+ videos shipped for YouTube Shorts & TikTok (9:16 portrait format)
+                    </p>
+                    <div class="portrait-grid">
+                        <a href="https://www.youtube.com/shorts/f9Lhn6EM5A8" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-1.png" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/Nn6riDhaMbQ" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-2.png" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/fN0294VS6b4" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-3.png" alt="SuperPlastic YouTube Short">
+                        </a>
+                        <a href="https://www.youtube.com/shorts/u_x_vxBqex8" class="portrait-item" target="_blank">
+                            <img src="assets/superplastic/sp-shipped-4.png" alt="SuperPlastic YouTube Short">
+                        </a>
+                    </div>
+                </div>
+                
                 <!-- Quantified results - 36% do this but it's powerful -->
                 <div class="modal-section">
                     <p class="modal-section-title">Results</p>
@@ -1363,44 +1481,6 @@
                     </div>
                 </div>
                 
-                <!-- Process images - 71% show these -->
-                <div class="modal-section">
-                    <p class="modal-section-title">Process</p>
-                    <div class="process-grid" style="grid-template-columns: repeat(3, 1fr);">
-                        <div>
-                            <div class="process-item">
-                                <img src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
-                            </div>
-                            <p class="process-caption">Xsens body capture</p>
-                        </div>
-                        <div>
-                            <div class="process-item">
-                                <img src="assets/superplastic/sp-process-2.jpeg" alt="Tyler wearing Faceware facial capture headset">
-                            </div>
-                            <p class="process-caption">Faceware face capture</p>
-                        </div>
-                        <div>
-                            <div class="process-item">
-                                <iframe title="Super Plastic Mocap Room" 
-                                        frameborder="0" 
-                                        allowfullscreen 
-                                        mozallowfullscreen="true" 
-                                        webkitallowfullscreen="true" 
-                                        allow="autoplay; fullscreen; xr-spatial-tracking" 
-                                        src="https://sketchfab.com/models/8c884225bcad4811bb9d242964c2be8c/embed?ui_theme=dark&autostart=1&autospin=0.2">
-                                </iframe>
-                            </div>
-                            <p class="process-caption">Mocap studio (3D scan)</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pipeline Diagram - Full width -->
-                <div class="modal-section">
-                    <p class="modal-section-title">Pipeline Architecture</p>
-                    <img src="assets/superplastic/sp-pipeline.png" alt="SuperPlastic Mocap to Unreal Pipeline" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
-                </div>
-                
                 <!-- Tools - 96% list these -->
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
@@ -1412,28 +1492,6 @@
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Python</span>
                         <span class="tool-tag">C++</span>
-                    </div>
-                </div>
-                
-                <!-- Shipped Examples - portrait format (9:16 for TikTok/Shorts) -->
-                <div class="modal-section">
-                    <p class="modal-section-title">Shipped Examples</p>
-                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
-                        256+ videos shipped for YouTube Shorts & TikTok (9:16 portrait format)
-                    </p>
-                    <div class="portrait-grid">
-                        <a href="https://www.youtube.com/shorts/f9Lhn6EM5A8" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-1.png" alt="SuperPlastic YouTube Short">
-                        </a>
-                        <a href="https://www.youtube.com/shorts/Nn6riDhaMbQ" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-2.png" alt="SuperPlastic YouTube Short">
-                        </a>
-                        <a href="https://www.youtube.com/shorts/fN0294VS6b4" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-3.png" alt="SuperPlastic YouTube Short">
-                        </a>
-                        <a href="https://www.youtube.com/shorts/u_x_vxBqex8" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-4.png" alt="SuperPlastic YouTube Short">
-                        </a>
                     </div>
                 </div>
             </div>
@@ -1470,6 +1528,12 @@
                         <span class="modal-meta-label">Status:</span>
                         <span class="modal-meta-value">Committee Recommended for SIGGRAPH</span>
                     </div>
+                </div>
+                
+                <!-- Thesis Link - credibility upfront -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Thesis Abstract</p>
+                    <a href="https://researchdiscovery.drexel.edu/esploro/outputs/graduate/AI-powered-storyboard-to-3D-scene-generation/991022138782104721" target="_blank" style="color: var(--accent-primary); font-size: 14px;">View on Drexel University Library →</a>
                 </div>
                 
                 <div class="modal-section">
@@ -1548,11 +1612,6 @@
                         <strong style="color: var(--text-secondary);">Novel finding withheld</strong> pending SIGGRAPH 2026 submission. 
                         Happy to discuss in interviews.
                     </p>
-                </div>
-                
-                <div class="modal-section">
-                    <p class="modal-section-title">Thesis Abstract</p>
-                    <a href="https://researchdiscovery.drexel.edu/esploro/outputs/graduate/AI-powered-storyboard-to-3D-scene-generation/991022138782104721" target="_blank" style="color: var(--accent-primary); font-size: 14px;">View on Drexel University Library →</a>
                 </div>
             </div>
         </div>
@@ -1913,6 +1972,19 @@
         // Close any open modal
         function closeModal() {
             document.querySelectorAll('.modal-overlay').forEach(modal => {
+                // Stop and reset videos
+                modal.querySelectorAll('video').forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+                
+                // Reset iframes (Vimeo, Sketchfab) by reloading src
+                modal.querySelectorAll('iframe').forEach(iframe => {
+                    const src = iframe.src;
+                    iframe.src = '';
+                    iframe.src = src;
+                });
+                
                 modal.classList.remove('active');
             });
             document.body.style.overflow = '';
@@ -1920,7 +1992,10 @@
         
         // Close modal on escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeLightbox();
+            }
         });
         
         // Close modal on overlay click
@@ -1929,6 +2004,37 @@
                 if (e.target === overlay) closeModal();
             });
         });
+        
+        // Lightbox functionality
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Make process images and standalone images zoomable (not linked images)
+        document.querySelectorAll('.process-item img:not(a img), .modal-section > img').forEach(img => {
+            if (!img.closest('a')) {
+                img.classList.add('zoomable');
+                img.onclick = () => openLightbox(img.src);
+            }
+        });
     </script>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
 </body>
 </html>
