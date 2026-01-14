@@ -1511,9 +1511,14 @@
             <div class="modal-body">
                 <h2 class="modal-title">StoryboardTo3D</h2>
                 
-                <!-- SIGGRAPH Badge -->
-                <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 12px 20px; border-radius: 8px; margin-bottom: 24px; display: inline-block;">
-                    <span style="color: white; font-weight: 600; font-size: 14px;">SIGGRAPH 2026 Submission In Progress</span>
+                <!-- Publication Badge -->
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
+                    <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 10px 16px; border-radius: 6px; display: inline-block;">
+                        <span style="color: white; font-weight: 600; font-size: 13px;">SIGGRAPH 2026 Submission</span>
+                    </div>
+                    <div style="background: var(--bg-secondary); border: 1px solid var(--accent-success); padding: 10px 16px; border-radius: 6px; display: inline-block;">
+                        <span style="color: var(--accent-success); font-weight: 600; font-size: 13px;">✓ Full Thesis Now Available</span>
+                    </div>
                 </div>
                 
                 <div class="modal-meta">
@@ -1526,23 +1531,40 @@
                         <span class="modal-meta-value">MS Thesis, Drexel University</span>
                     </div>
                     <div class="modal-meta-item">
-                        <span class="modal-meta-label">Status:</span>
-                        <span class="modal-meta-value">Committee: "One of the best theses they have seen"</span>
+                        <span class="modal-meta-label">Committee:</span>
+                        <span class="modal-meta-value">"One of the best theses they have seen"</span>
                     </div>
+                </div>
+                
+                <!-- Abstract -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Abstract</p>
+                    <p class="modal-section-content">
+                        Hand-drawn storyboards enable rapid visualization in animation and game development, but translating 2D sketches into 3D scenes requires considerable manual effort. This thesis presents StoryboardTo3D, an Unreal Engine 5.6 plugin that automates storyboard-to-3D translation using vision-language models. The system implements a multi-angle capture framework (7 viewpoints) and iterative positioning refinement with AI feedback loops.
+                    </p>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">The Problem</p>
                     <p class="modal-section-content">
-                        Translating 2D storyboards into 3D scenes requires hours of manual camera placement, object positioning, and depth interpretation. This bottleneck delays production, especially for small teams without dedicated previs artists.
+                        Translating 2D storyboards into 3D scenes requires hours of manual camera placement, object positioning, and depth interpretation. Existing research prototypes convert text-based screenplays into preliminary scenes but do not efficiently translate visual storyboard sketches into 3D layouts using production asset libraries.
                     </p>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
-                        An Unreal Engine 5.6 plugin that automates storyboard-to-3D translation using vision-language models. The system analyzes hand-drawn panels, positions characters in 3D space, and iteratively refines placement through AI feedback loops.
+                        An Unreal Engine 5.6 plugin with modular AI provider abstraction supporting three backends (Claude Sonnet 4.5 Extended Thinking, ChatGPT-4o, LLaVA-13B). The system's primary value is time-shifted automation: users initiate positioning processes that run unattended—including overnight—and return to completed 3D scenes.
                     </p>
+                </div>
+                
+                <!-- NEW: Pipeline Diagram -->
+                <div class="modal-section">
+                    <p class="modal-section-title">System Pipeline</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        Seven-stage iterative refinement loop: analyze → generate → capture multi-angle → AI feedback → adjust → repeat until convergence.
+                    </p>
+                    <img src="assets/storyboard/stb-pipeline.png" alt="StoryboardTo3D pipeline diagram showing the 7-stage iterative refinement workflow from storyboard input through AI analysis to final 3D scene" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                 </div>
                 
                 <!-- Before/After Section -->
@@ -1568,6 +1590,16 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Plugin Interface</p>
                     <img src="assets/storyboard/stb-ui.png" alt="StoryboardTo3D plugin interface showing panel management and AI analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                </div>
+                
+                <!-- NEW: Multi-Angle Capture System -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Multi-Angle Capture Architecture</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px;">
+                        Seven-viewpoint sequential capture system provides comprehensive spatial context for AI analysis. Six scout camera positions (front, back, left, right, top, 3/4 view) plus one hero camera expose positioning errors invisible from single viewpoints—depth misjudgments, occlusion issues, rotation errors.
+                    </p>
+                    <img src="assets/storyboard/stb-multi-angle.png" alt="Multi-angle capture showing 7 camera perspectives of the same 3D scene for comprehensive spatial analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <p class="process-caption" style="margin-top: 8px;">Figure 5.4: Camera perspectives from a single iteration—front, right, back, left, top, 3/4, and hero views.</p>
                 </div>
                 
                 <!-- Research Scope -->
@@ -1597,14 +1629,113 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Novel Finding: AI Score Hallucination</p>
                     <p class="modal-section-content" style="margin-bottom: 16px;">
-                        Expert validation revealed a <strong>37% gap</strong> between AI self-reported confidence (84.4%) and actual positioning success (47.2%). Different models showed dramatically different calibration — ChatGPT-4o scored failures as "nearly perfect" while Claude correctly identified critical errors.
+                        Expert validation revealed a <strong>37.2% calibration gap</strong> between AI self-reported confidence (84.4% average) and actual positioning success (47.2% average). Vision-language models systematically assign high confidence scores to objectively inaccurate spatial compositions.
+                    </p>
+                    
+                    <!-- NEW: Calibration Gap Chart (Figure 5.2/5.3) -->
+                    <img src="assets/storyboard/stb-calibration-gap.png" alt="Bar chart comparing AI self-reported scores (84.4%) versus expert-validated actual success rates (47.2%), showing the 37.2% calibration gap" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-bottom: 12px;">
+                    <p class="process-caption">Figure 5.3: The 37.2% gap between what AI models report and actual positioning quality.</p>
+                </div>
+                
+                <!-- Model Comparison Table -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Model Performance Comparison</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        Expert validation across 12 panels × 3 models revealed dramatically different calibration patterns despite similar self-reported scores.
+                    </p>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Model</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Actual Success</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Self-Reported</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Calibration Error</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Time/Panel</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Cost/Panel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Claude Sonnet 4.5</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--accent-success); font-weight: 600;">83.3%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">84.8%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--accent-success);">+1.5%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">69.1 min</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.94</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">LLaVA-13B</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--accent-warning); font-weight: 600;">41.7%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">84.6%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--accent-warning);">+42.9%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">7.8 min</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">ChatGPT-4o</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: #ef4444; font-weight: 600;">16.7%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">83.8%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: #ef4444;">+67.1%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">33.7 min</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- NEW: Cost vs Quality Tradeoff (Figure 6.1) -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Cost vs Quality Tradeoff</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        Three-dimensional tradeoff visualization for production decision-making: cost per scene, processing time, and expert-validated success rate.
+                    </p>
+                    <img src="assets/storyboard/stb-cost-quality.png" alt="3D scatter plot showing cost ($0-0.94), time (7.8-69.1 min), and quality (16.7-83.3%) tradeoffs across Claude, LLaVA, and ChatGPT-4o" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <p class="process-caption" style="margin-top: 8px;">Figure 6.1: Claude achieves highest quality (83.3%) at highest cost ($0.94/panel). LLaVA offers free local inference with moderate success (41.7%).</p>
+                </div>
+                
+                <!-- NEW: Panel-by-Panel Comparison (Figure 5.1) -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Panel-by-Panel Analysis</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
+                        Granular success comparison across all 12 test panels × 3 models reveals per-scenario performance patterns.
+                    </p>
+                    <img src="assets/storyboard/stb-panel-comparison.png" alt="Detailed chart showing success/failure for each of 12 storyboard panels across Claude, ChatGPT-4o, and LLaVA models" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <p class="process-caption" style="margin-top: 8px;">Figure 5.1: Panel-by-panel success patterns showing model-specific strengths and failure modes.</p>
+                </div>
+                
+                <!-- Panel 9 Case Study -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Case Study: Panel 9 (Bench Scene)</p>
+                    <p class="modal-section-content" style="margin-bottom: 16px;">
+                        All three models failed positioning on the same geometry, yet reported dramatically different confidence scores. ChatGPT-4o and LLaVA-13B scored 85/100 claiming "nearly perfect" positioning with "no visibility issues." Claude scored 70/100 and correctly identified "CRITICAL MISMATCH" with camera occlusion by bench.
                     </p>
                     <img src="assets/storyboard/stb-hallucination.png" alt="Panel 9 case study: ChatGPT-4o and LLaVA scored 85/100 for failed positioning, while Claude scored 70/100 and identified the critical bench occlusion error" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
-                    <p class="process-caption" style="margin-top: 8px;">Panel 9: All three models evaluated identical geometry. GPT-4o/LLaVA: 85/100 "nearly perfect." Claude: 70/100, identified critical occlusion.</p>
+                    <p class="process-caption" style="margin-top: 8px;">Panel 9: Identical geometry, divergent AI assessments. Only Claude identified the critical occlusion failure.</p>
+                </div>
+                
+                <!-- Key Contributions -->
+                <div class="modal-section">
+                    <p class="modal-section-title">Research Contributions</p>
+                    <div style="display: grid; gap: 12px;">
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
+                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">System Contribution</p>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Minimum viable product demonstrating automated storyboard-to-3D conversion with modular AI provider abstraction.</p>
+                        </div>
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
+                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">Research Contribution</p>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Discovery and documentation of AI Score Hallucination—systematic over-confidence in VLM spatial reasoning with implications for autonomous termination logic.</p>
+                        </div>
+                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
+                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">Architecture Contribution</p>
+                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Seven-viewpoint sequential capture system providing comprehensive spatial context for AI analysis of positioning errors.</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">Tools</p>
+                    <p class="modal-section-title">Tools & Technologies</p>
                     <div class="tools-list">
                         <span class="tool-tag">Unreal Engine 5.6</span>
                         <span class="tool-tag">C++</span>
@@ -1612,19 +1743,27 @@
                         <span class="tool-tag">Claude API</span>
                         <span class="tool-tag">GPT-4o API</span>
                         <span class="tool-tag">LLaVA-13B</span>
+                        <span class="tool-tag">Ollama</span>
+                        <span class="tool-tag">PySide6</span>
+                        <span class="tool-tag">Depth-Anything-V2</span>
+                        <span class="tool-tag">OpenCV</span>
                     </div>
                 </div>
                 
                 <!-- CTA -->
-                <div class="modal-section" style="background: var(--bg-secondary); padding: 20px; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
-                    <p class="modal-section-content" style="color: var(--text-secondary); font-size: 14px; margin: 0;">
-                        <strong>Inquire for full thesis</strong> — includes complete methodology, architecture details, and extended results analysis.
+                <div class="modal-section" style="background: var(--bg-secondary); padding: 24px; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <p style="color: var(--text-primary); font-weight: 600; font-size: 15px; margin-bottom: 8px;">Full Thesis Available</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
+                        Complete methodology, architecture details, statistical analysis, and extended results across 124 pages.
                     </p>
+                    <a href="assets/storyboard/Thesis_Varacchi_StoryboardTo3D.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--accent-primary); color: white; border-radius: 6px; font-weight: 500; font-size: 14px; text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download Full Thesis (PDF)
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    
     <!-- MODAL: AI Mocap Pipeline -->
     <div class="modal-overlay" id="modal-ai-mocap">
         <button class="modal-close" onclick="closeModal()">
