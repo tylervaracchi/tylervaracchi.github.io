@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tyler Varacchi | Lead Technical Artist</title>
+    <meta name="description" content="Tyler Varacchi - Technical Artist specializing in real-time pipelines, motion capture, and AI integration. Led mocap pipeline at SuperPlastic (232M+ views). MS Digital Media, Drexel University.">
+    <title>Tyler Varacchi | Technical Artist</title>
     
     <!-- 
     =====================================================================
@@ -47,6 +48,7 @@
         :root {
             /* Background colors - Dark theme (89% of TAs use dark) */
             --bg-primary: #09090b;      /* Zinc 950 - Main background */
+            --bg-primary-alpha: rgba(9, 9, 11, 0.95); /* Semi-transparent for sticky nav */
             --bg-secondary: #18181b;    /* Zinc 900 - Cards, sections */
             --bg-tertiary: #27272a;     /* Zinc 800 - Borders, dividers */
             
@@ -56,8 +58,8 @@
             --text-muted: #71717a;      /* Zinc 500 - Captions, labels */
             
             /* Accent colors */
-            --accent-primary: #3b82f6;  /* Blue 500 - Links, buttons */
-            --accent-hover: #60a5fa;    /* Blue 400 - Hover states */
+            --accent-primary: #f97316;  /* Orange 500 - Links, buttons */
+            --accent-hover: #fb923c;    /* Orange 400 - Hover states */
             --accent-success: #22c55e;  /* Green 500 - Success states */
             --accent-warning: #f59e0b;  /* Amber 500 - NDA/locked items */
             
@@ -279,11 +281,6 @@
         
         .work-card {
             cursor: pointer;
-            transition: transform var(--transition-normal);
-        }
-        
-        .work-card:hover {
-            transform: translateY(-4px);
         }
         
         .work-thumbnail {
@@ -306,6 +303,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .work-card:hover .work-thumbnail img,
+        .work-card:hover .work-thumbnail video {
+            transform: scale(1.05);
         }
         
         /* Lock icon for NDA/password-protected work */
@@ -326,6 +329,36 @@
             width: 16px;
             height: 16px;
             color: var(--accent-warning);
+        }
+        
+        /* Full thumbnail lock overlay for NDA content */
+        .work-thumbnail .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            border-radius: 12px;
+        }
+        
+        .work-thumbnail .lock-overlay svg {
+            width: 48px;
+            height: 48px;
+            color: var(--accent-warning);
+        }
+        
+        .work-thumbnail .lock-overlay span {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-warning);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .work-card-title {
@@ -531,7 +564,7 @@
         /* Results metrics grid */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 16px;
         }
         
@@ -943,14 +976,14 @@
             justify-content: center;
             z-index: 10000;
             opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
             cursor: zoom-out;
         }
         
         .lightbox.active {
             opacity: 1;
-            visibility: visible;
+            pointer-events: auto;
         }
         
         .lightbox img {
@@ -984,9 +1017,210 @@
         .zoomable:hover {
             transform: scale(1.02);
         }
+        
+        /* 
+        =====================================================================
+        STICKY NAVIGATION
+        - Minimal nav appears on scroll
+        - Links to main sections
+        =====================================================================
+        */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary-alpha);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--bg-tertiary);
+            z-index: 100;
+            transform: translateY(-100%);
+            transition: transform var(--transition-normal);
+        }
+        
+        .sticky-nav.visible {
+            transform: translateY(0);
+        }
+        
+        .sticky-nav-container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sticky-nav-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .sticky-nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .sticky-nav-link {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color var(--transition-fast);
+        }
+        
+        .sticky-nav-link:hover {
+            color: var(--text-primary);
+        }
+        
+        @media (max-width: 600px) {
+            .sticky-nav-links {
+                gap: 20px;
+            }
+            .sticky-nav-link {
+                font-size: 11px;
+            }
+        }
+        
+        /* 
+        =====================================================================
+        ENTRANCE ANIMATIONS
+        - Subtle fade-in on scroll
+        - Staggered card entrance
+        - Uses .js-enabled class for progressive enhancement
+        =====================================================================
+        */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Work card animations - only when JS enabled */
+        /* Default: visible (no-JS fallback) */
+        .work-card {
+            opacity: 1;
+            transform: none;
+            transition: transform var(--transition-normal), opacity 0.5s ease;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-4px);
+        }
+        
+        /* When JS is enabled, start hidden for animation */
+        .js-enabled .work-card {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .js-enabled .work-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .js-enabled .work-card.visible:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Stagger delays for work cards */
+        .js-enabled .work-card:nth-child(1) { transition-delay: 0.1s; }
+        .js-enabled .work-card:nth-child(2) { transition-delay: 0.2s; }
+        .js-enabled .work-card:nth-child(3) { transition-delay: 0.3s; }
+        .js-enabled .work-card:nth-child(4) { transition-delay: 0.4s; }
+        .js-enabled .work-card:nth-child(5) { transition-delay: 0.5s; }
+        .js-enabled .work-card:nth-child(6) { transition-delay: 0.6s; }
+        
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 0 0 8px 8px;
+            z-index: 10001;
+            transition: top 0.3s ease;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+            color: white;
+        }
+        
+        /* Visually hidden but accessible to screen readers */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Reusable info card grid (extracted from inline styles) */
+        .info-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .info-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .info-card-title {
+            color: var(--accent-primary);
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        
+        .info-card-content {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- Skip link for accessibility -->
+    <a href="#work" class="skip-link">Skip to main content</a>
+    
+    <!-- Sticky Navigation -->
+    <nav class="sticky-nav" id="sticky-nav">
+        <div class="sticky-nav-container">
+            <span class="sticky-nav-name">Tyler Varacchi</span>
+            <div class="sticky-nav-links">
+                <a href="#work" class="sticky-nav-link">Work</a>
+                <a href="#skills" class="sticky-nav-link">Skills</a>
+                <a href="#about" class="sticky-nav-link">About</a>
+                <a href="#contact" class="sticky-nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
     <!-- 
     =====================================================================
     HERO SECTION
@@ -1001,7 +1235,7 @@
                 
                 <!-- Title with quantified metric - 96% have title, 36% quantify -->
                 <p class="hero-title">
-                    Lead Technical Artist · Mocap Systems · <span class="metric">232M+ Views Shipped</span>
+                    Pipeline & Mocap Technical Artist · <span class="metric">232M+ Views Shipped</span>
                 </p>
                 
                 <!-- Contact links - 89% of TAs include in hero -->
@@ -1010,15 +1244,15 @@
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
                         Email
                     </a>
-                    <a href="https://www.linkedin.com/in/tyler-varacchi" class="hero-link" target="_blank">
+                    <a href="https://www.linkedin.com/in/tyler-varacchi" class="hero-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         LinkedIn
                     </a>
-                    <a href="https://github.com/tylervaracchi" class="hero-link" target="_blank">
+                    <a href="https://github.com/tylervaracchi" class="hero-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
                         GitHub
                     </a>
-                    <a href="Tyler_Varacchi_Resume.pdf" class="hero-link" target="_blank">
+                    <a href="Tyler_Varacchi_Resume.pdf" class="hero-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                         Resume
                     </a>
@@ -1063,7 +1297,7 @@
                         </video>
                     </div>
                     <h3 class="work-card-title">SuperPlastic Real-Time Pipeline</h3>
-                    <p class="work-card-role">Lead Technical Artist · 232M views</p>
+                    <p class="work-card-role">Lead Technical Artist · 232M+ views</p>
                 </div>
                 
                 <!-- 
@@ -1073,10 +1307,10 @@
                 -->
                 <div class="work-card" onclick="openModal('storyboard')">
                     <div class="work-thumbnail">
-                        <img src="assets/thumbnails/thumb-storyboard.png" alt="Storyboard to 3D comparison">
+                        <img loading="lazy" decoding="async" src="assets/thumbnails/thumb-storyboard.png" alt="Storyboard to 3D comparison">
                     </div>
                     <h3 class="work-card-title">StoryboardTo3D</h3>
-                    <p class="work-card-role">AI Research · SIGGRAPH Submission</p>
+                    <p class="work-card-role">AI Research · Committee Recommended for SIGGRAPH 2026</p>
                 </div>
                 
                 <!-- 
@@ -1085,10 +1319,10 @@
                 -->
                 <div class="work-card" onclick="openModal('burlington')">
                     <div class="work-thumbnail">
-                        <img src="assets/thumbnails/thumb-burlington.jpeg" alt="Burlington public sculpture render">
+                        <img loading="lazy" decoding="async" src="assets/thumbnails/thumb-burlington.jpeg" alt="Burlington public sculpture render">
                     </div>
-                    <h3 class="work-card-title">Burlington Public Sculpture</h3>
-                    <p class="work-card-role">3D Visualization · Built</p>
+                    <h3 class="work-card-title">Real-Time Visualization Pipeline</h3>
+                    <p class="work-card-role">UE5 Path Tracing · Cesium Geospatial · Built</p>
                 </div>
                 
                 <!-- 
@@ -1097,9 +1331,10 @@
                 -->
                 <div class="work-card" onclick="openPasswordModal('nike')">
                     <div class="work-thumbnail">
-                        <img src="assets/thumbnails/thumb-nike.jpg" alt="Nike shoe visualization">
-                        <div class="lock-badge">
+                        <img loading="lazy" decoding="async" src="assets/thumbnails/thumb-nike.jpg" alt="Nike shoe visualization">
+                        <div class="lock-overlay">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
+                            <span>NDA Protected</span>
                         </div>
                     </div>
                     <h3 class="work-card-title">VictorVictor × Nike</h3>
@@ -1125,8 +1360,9 @@
                 -->
                 <div class="work-card" onclick="openModal('robot')">
                     <div class="work-thumbnail">
-                        <!-- REPLACE: Screenshot or GIF of gameplay -->
-                        <div class="placeholder">[GIF: Voice-controlled gameplay]</div>
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/thumbnails/thumb-robot.mp4" type="video/mp4">
+                        </video>
                     </div>
                     <h3 class="work-card-title">Voice-Controlled Combat</h3>
                     <p class="work-card-role">Unity Game · Novel Input</p>
@@ -1152,6 +1388,7 @@
                         <p class="skill-tier">Expert</p>
                         <p class="skill-list">
                             Unreal Engine 5 <span>·</span> 
+                            Blueprint <span>·</span>
                             Maya <span>·</span> 
                             Xsens Motion Capture <span>·</span> 
                             Faceware <span>·</span> 
@@ -1164,18 +1401,20 @@
                         <p class="skill-list">
                             Python <span>·</span> 
                             C++ (AnimNodes) <span>·</span> 
+                            Niagara <span>·</span>
                             Character Rigging <span>·</span> 
-                            Shaders <span>·</span> 
-                            Substance Painter
+                            Shader Development <span>·</span> 
+                            Substance Painter <span>·</span>
+                            Substance Designer
                         </p>
                     </div>
                     
                     <div class="skill-category">
                         <p class="skill-tier">Familiar</p>
                         <p class="skill-list">
-                            Houdini <span>·</span> 
                             Unity <span>·</span> 
-                            ZBrush <span>·</span> 
+                            USD <span>·</span>
+                            PyTorch <span>·</span>
                             After Effects <span>·</span>
                             Blender
                         </p>
@@ -1188,10 +1427,8 @@
                         <p class="skill-tier">Production</p>
                         <p class="skill-list">
                             Perforce <span>·</span> 
-                            Shotgun <span>·</span> 
-                            Jira <span>·</span> 
                             Git <span>·</span>
-                            Confluence
+                            Optimization
                         </p>
                     </div>
                     
@@ -1227,7 +1464,7 @@
                         <strong>Technical Artist with 4+ years of production experience.</strong> 
                         Built the real-time mocap pipeline at SuperPlastic that shipped 256+ videos 
                         to 232M views (1M subscribers in one month). 
-                        Led 8 artists from offline to real-time UE5 rendering.
+                        Led 5 artists from offline to real-time UE5 rendering.
                     </p>
                     
                     <!-- Current focus - 54% state this -->
@@ -1238,7 +1475,7 @@
                     </p>
                     
                     <!-- Resume download - 75% include this -->
-                    <a href="Tyler_Varacchi_Resume.pdf" class="resume-button" target="_blank">
+                    <a href="Tyler_Varacchi_Resume.pdf" class="resume-button" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                         Download Resume
                     </a>
@@ -1250,12 +1487,12 @@
                     
                     <div class="education-item">
                         <p class="education-degree">M.S. Digital Media</p>
-                        <p class="education-school">Drexel University · 3.97 GPA · 2025</p>
+                        <p class="education-school">Drexel University · 3.97 GPA · Dec 2025</p>
                     </div>
                     
                     <div class="education-item">
-                        <p class="education-degree">B.A. Art</p>
-                        <p class="education-school">University of Vermont · 2022</p>
+                        <p class="education-degree">B.A. Art and Design</p>
+                        <p class="education-school">University of Vermont · 3.5 GPA · 2022</p>
                     </div>
                     
                     <!-- Validation - 89% show external proof -->
@@ -1264,12 +1501,12 @@
                         
                         <div class="validation-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Thesis recommended for SIGGRAPH 2026
+                            Committee recommended for SIGGRAPH 2026 submission
                         </div>
                         
                         <div class="validation-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Original research: AI Score Hallucination
+                            Original finding: 37% AI confidence calibration gap
                         </div>
                         
                         <div class="validation-item">
@@ -1279,7 +1516,12 @@
                         
                         <div class="validation-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Guest Lecturer, UVM (2 semesters, 36 students)
+                            Burlington sculpture approved by city council and built
+                        </div>
+                        
+                        <div class="validation-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
+                            Guest Lecturer, UVM (2 semesters)
                         </div>
                     </div>
                 </div>
@@ -1330,14 +1572,14 @@
     -->
     
     <!-- MODAL: SuperPlastic -->
-    <div class="modal-overlay" id="modal-superplastic">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-superplastic" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
             <div class="modal-hero portrait">
                 <div class="portrait-video-container">
-                    <iframe src="https://player.vimeo.com/video/850397863?badge=0&autopause=0&player_id=0&app_id=58479&loop=1&autoplay=1&muted=1" 
+                    <iframe loading="lazy" src="https://player.vimeo.com/video/850397863?badge=0&autopause=0&player_id=0&app_id=58479&loop=1&autoplay=1&muted=1" 
                             frameborder="0" 
                             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
                             title="SuperPlastic Demo Reel">
@@ -1359,7 +1601,7 @@
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Team:</span>
-                        <span class="modal-meta-value">8 artists</span>
+                        <span class="modal-meta-value">5 artists</span>
                     </div>
                 </div>
                 
@@ -1368,7 +1610,7 @@
                     <p class="modal-section-title">The Problem</p>
                     <p class="modal-section-content">
                         SuperPlastic needed to produce high-volume animated content for YouTube Shorts 
-                        but was bottlenecked by 4-hour RenderMan renders per shot. Traditional offline 
+                        but was bottlenecked by overnight RenderMan renders per shot. Traditional offline 
                         rendering couldn't scale to social media's pace.
                     </p>
                 </div>
@@ -1379,7 +1621,7 @@
                         Built end-to-end real-time mocap pipeline in Unreal Engine 5. Managed mocap lab 
                         (Manus gloves, Xsens suit, Faceware) with weekly capture sessions and 2 actors. 
                         Wrote a custom C++ AnimNode that handled full-body and face retargeting at runtime. 
-                        Reduced turnaround from 4 hours to 5 minutes per shot.
+                        Reduced render time from overnight to 10 seconds per frame.
                     </p>
                 </div>
                 
@@ -1394,10 +1636,47 @@
                     </p>
                 </div>
                 
+                <div class="modal-section">
+                    <p class="modal-section-title">Additional Technical Scope</p>
+                    <div class="info-card-grid">
+                        <div class="info-card">
+                            <p class="info-card-title">Asset Pipeline</p>
+                            <p class="info-card-content">Converted 100+ Maya assets to UE5. Optimized materials, LODs, draw calls, and collision for real-time.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Control Rigs</p>
+                            <p class="info-card-content">Set up Control Rigs for 7 characters so animators and lighters could tweak in-engine without round-tripping to Maya.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">VFX & Destruction</p>
+                            <p class="info-card-content">Created Niagara VFX and Chaos destruction systems. Built vehicle animation capture with Take Recorder. Reused across productions.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Virtual Production</p>
+                            <p class="info-card-content">Prototyped virtual production with VCams and real-time VTuber streaming. VCam used for shot direction.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Environment Capture</p>
+                            <p class="info-card-content">Used photogrammetry to capture mocap room for 1:1 virtual environment recreation.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Pipeline & Tools</p>
+                            <p class="info-card-content">Scaled Perforce to 10+ artists. Wrote Python tools for Maya including UV channel validator used by 5 artists.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Quality Control</p>
+                    <p class="modal-section-content">
+                        First-line approval for 100+ YouTube Shorts. Reviewed all team animations before Animation Head sign-off.
+                    </p>
+                </div>
+                
                 <!-- Pipeline Diagram - Full width -->
                 <div class="modal-section">
                     <p class="modal-section-title">Pipeline Architecture</p>
-                    <img src="assets/superplastic/sp-pipeline.png" alt="SuperPlastic Mocap Pipeline: Capture devices (Faceware, Xsens, Manus) through Live Link to custom C++ Retarget Node in Unreal Engine" style="width: 100%; border-radius: 8px;">
+                    <img loading="lazy" decoding="async" src="assets/superplastic/sp-pipeline.png" alt="SuperPlastic Mocap Pipeline: Capture devices (Faceware, Xsens, Manus) through Live Link to custom C++ Retarget Node in Unreal Engine" style="width: 100%; border-radius: 8px;">
                 </div>
                 
                 <!-- Process images - 71% show these -->
@@ -1406,13 +1685,13 @@
                     <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
                         <div>
                             <div class="process-item">
-                                <img src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
+                                <img loading="lazy" decoding="async" src="assets/superplastic/sp-process-1.jpg" alt="Tyler in Xsens mocap suit during capture session">
                             </div>
                             <p class="process-caption">Xsens body capture</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <img src="assets/superplastic/sp-process-2.jpeg" alt="Tyler wearing Faceware facial capture headset">
+                                <img loading="lazy" decoding="async" src="assets/superplastic/sp-process-2.jpeg" alt="Tyler wearing Faceware facial capture headset">
                             </div>
                             <p class="process-caption">Faceware face capture</p>
                         </div>
@@ -1423,7 +1702,7 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Mocap Studio (3D Scan)</p>
                     <div style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--bg-tertiary);">
-                        <iframe title="Super Plastic Mocap Room" 
+                        <iframe loading="lazy" title="Super Plastic Mocap Room" 
                                 frameborder="0" 
                                 allowfullscreen 
                                 mozallowfullscreen="true" 
@@ -1442,17 +1721,17 @@
                         256+ videos shipped for YouTube Shorts & TikTok (9:16 portrait format)
                     </p>
                     <div class="portrait-grid">
-                        <a href="https://www.youtube.com/shorts/f9Lhn6EM5A8" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-1.png" alt="SuperPlastic YouTube Short">
+                        <a href="https://www.youtube.com/shorts/f9Lhn6EM5A8" class="portrait-item" target="_blank" rel="noopener noreferrer">
+                            <img loading="lazy" decoding="async" src="assets/superplastic/sp-shipped-1.png" alt="SuperPlastic YouTube Short">
                         </a>
-                        <a href="https://www.youtube.com/shorts/Nn6riDhaMbQ" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-2.png" alt="SuperPlastic YouTube Short">
+                        <a href="https://www.youtube.com/shorts/Nn6riDhaMbQ" class="portrait-item" target="_blank" rel="noopener noreferrer">
+                            <img loading="lazy" decoding="async" src="assets/superplastic/sp-shipped-2.png" alt="SuperPlastic YouTube Short">
                         </a>
-                        <a href="https://www.youtube.com/shorts/fN0294VS6b4" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-3.png" alt="SuperPlastic YouTube Short">
+                        <a href="https://www.youtube.com/shorts/fN0294VS6b4" class="portrait-item" target="_blank" rel="noopener noreferrer">
+                            <img loading="lazy" decoding="async" src="assets/superplastic/sp-shipped-3.png" alt="SuperPlastic YouTube Short">
                         </a>
-                        <a href="https://www.youtube.com/shorts/u_x_vxBqex8" class="portrait-item" target="_blank">
-                            <img src="assets/superplastic/sp-shipped-4.png" alt="SuperPlastic YouTube Short">
+                        <a href="https://www.youtube.com/shorts/u_x_vxBqex8" class="portrait-item" target="_blank" rel="noopener noreferrer">
+                            <img loading="lazy" decoding="async" src="assets/superplastic/sp-shipped-4.png" alt="SuperPlastic YouTube Short">
                         </a>
                     </div>
                 </div>
@@ -1473,10 +1752,6 @@
                             <p class="result-value">1M</p>
                             <p class="result-label">Subs in 1 Month</p>
                         </div>
-                        <div class="result-card">
-                            <p class="result-value">48×</p>
-                            <p class="result-label">Faster Renders</p>
-                        </div>
                     </div>
                 </div>
                 
@@ -1484,13 +1759,16 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
-                        <span class="tool-tag">Unreal Engine 5</span>
-                        <span class="tool-tag">Xsens MVN</span>
+                        <span class="tool-tag">Unreal Engine 5.1</span>
+                        <span class="tool-tag">Live Link</span>
+                        <span class="tool-tag">Niagara</span>
+                        <span class="tool-tag">Xsens MVN Animate</span>
                         <span class="tool-tag">Manus</span>
-                        <span class="tool-tag">Faceware</span>
+                        <span class="tool-tag">Faceware Studio</span>
                         <span class="tool-tag">Maya</span>
-                        <span class="tool-tag">Python</span>
-                        <span class="tool-tag">C++</span>
+                        <span class="tool-tag">Python (Maya API)</span>
+                        <span class="tool-tag">C++ (UE5 Animation Runtime)</span>
+                        <span class="tool-tag">Perforce</span>
                     </div>
                 </div>
             </div>
@@ -1498,14 +1776,14 @@
     </div>
     
     <!-- MODAL: StoryboardTo3D -->
-    <div class="modal-overlay" id="modal-storyboard">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-storyboard" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
             <div class="modal-hero">
                 <div style="padding:41% 0 0 0;position:relative;">
-                    <iframe src="https://player.vimeo.com/video/1152943813?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="StoryboardTo3D Demo"></iframe>
+                    <iframe loading="lazy" src="https://player.vimeo.com/video/1152943813?autoplay=1&loop=1&muted=1&background=1&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="StoryboardTo3D Demo"></iframe>
                 </div>
             </div>
             <div class="modal-body">
@@ -1513,8 +1791,8 @@
                 
                 <!-- Publication Badge -->
                 <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
-                    <div style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); padding: 10px 16px; border-radius: 6px; display: inline-block;">
-                        <span style="color: white; font-weight: 600; font-size: 13px;">SIGGRAPH 2026 Submission</span>
+                    <div style="background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%); padding: 10px 16px; border-radius: 6px; display: inline-block;">
+                        <span style="color: white; font-weight: 600; font-size: 13px;">Committee Recommended for SIGGRAPH 2026</span>
                     </div>
                     <div style="background: var(--bg-secondary); border: 1px solid var(--accent-success); padding: 10px 16px; border-radius: 6px; display: inline-block;">
                         <span style="color: var(--accent-success); font-weight: 600; font-size: 13px;">✓ Full Thesis Now Available</span>
@@ -1554,7 +1832,7 @@
                 <div class="modal-section">
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
-                        An Unreal Engine 5.6 plugin with modular AI provider abstraction supporting three backends (Claude Sonnet 4.5 Extended Thinking, ChatGPT-4o, LLaVA-13B). The system's primary value is time-shifted automation: users initiate positioning processes that run unattended—including overnight—and return to completed 3D scenes.
+                        An Unreal Engine 5.6 plugin with modular AI provider abstraction supporting three backends (Claude Sonnet 4.5 Extended Thinking, ChatGPT-4o, LLaVA-13B). The system's primary value is time-shifted automation: users initiate positioning processes that run unattended—including overnight batch processing—and return to completed 3D scenes. While processing takes 4–41× longer than expert manual work (1.7 min baseline), it runs without human labor, enabling workflows for storyboard artists and indie developers who lack Unreal Engine expertise.
                     </p>
                 </div>
                 
@@ -1564,7 +1842,7 @@
                     <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
                         Seven-stage iterative refinement loop: analyze → generate → capture multi-angle → AI feedback → adjust → repeat until convergence.
                     </p>
-                    <img src="assets/storyboard/stb-pipeline.png" alt="StoryboardTo3D pipeline diagram showing the 7-stage iterative refinement workflow from storyboard input through AI analysis to final 3D scene" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-pipeline.png" alt="StoryboardTo3D pipeline diagram showing the 7-stage iterative refinement workflow from storyboard input through AI analysis to final 3D scene" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                 </div>
                 
                 <!-- Before/After Section -->
@@ -1573,13 +1851,13 @@
                     <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
                         <div>
                             <div class="process-item">
-                                <img src="assets/storyboard/stb-input.png" alt="Input storyboard panel showing dog and rabbit characters">
+                                <img loading="lazy" decoding="async" src="assets/storyboard/stb-input.png" alt="Input storyboard panel showing dog and rabbit characters">
                             </div>
                             <p class="process-caption">Input storyboard</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <img src="assets/storyboard/stb-result.png" alt="Generated 3D scene with characters positioned to match storyboard">
+                                <img loading="lazy" decoding="async" src="assets/storyboard/stb-result.png" alt="Generated 3D scene with characters positioned to match storyboard">
                             </div>
                             <p class="process-caption">Generated 3D scene</p>
                         </div>
@@ -1589,7 +1867,7 @@
                 <!-- UI Screenshot -->
                 <div class="modal-section">
                     <p class="modal-section-title">Plugin Interface</p>
-                    <img src="assets/storyboard/stb-ui.png" alt="StoryboardTo3D plugin interface showing panel management and AI analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-ui.png" alt="StoryboardTo3D plugin interface showing panel management and AI analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                 </div>
                 
                 <!-- NEW: Multi-Angle Capture System -->
@@ -1598,9 +1876,9 @@
                     <p class="modal-section-content" style="margin-bottom: 16px;">
                         Seven-viewpoint sequential capture system provides comprehensive spatial context for AI analysis. Six scout camera positions (front, back, left, right, top, 3/4 view) plus one hero camera expose positioning errors invisible from single viewpoints—depth misjudgments, occlusion issues, rotation errors.
                     </p>
-                    <img src="assets/storyboard/stb-camera-setup.png" alt="Diagram showing 7-camera architecture: Top, Back, Right, Left, Front, 3/4 Perspective, and Hero Camera positions around the scene with their specific validation roles" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-bottom: 16px;">
-                    <p class="process-caption" style="margin-bottom: 16px;">Figure 5.3: Seven-camera validation architecture—each viewpoint exposes different spatial errors.</p>
-                    <img src="assets/storyboard/stb-multi-angle.png" alt="Multi-angle capture showing 7 camera perspectives of the same 3D scene for comprehensive spatial analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-camera-setup.png" alt="Diagram showing 7-camera architecture: Top, Back, Right, Left, Front, 3/4 Perspective, and Hero Camera positions around the scene with their specific validation roles" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-bottom: 16px;">
+                    <p class="process-caption" style="margin-bottom: 16px;">Figure 4.3: Seven-camera validation architecture—each viewpoint exposes different spatial errors.</p>
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-multi-angle.png" alt="Multi-angle capture showing 7 camera perspectives of the same 3D scene for comprehensive spatial analysis" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                     <p class="process-caption" style="margin-top: 8px;">Figure 5.4: Camera perspectives from a single iteration—front, right, back, left, top, 3/4, and hero views.</p>
                 </div>
                 
@@ -1624,6 +1902,14 @@
                             <p class="result-value">7</p>
                             <p class="result-label">Camera Viewpoints</p>
                         </div>
+                        <div class="result-card">
+                            <p class="result-value">7.8–22.2</p>
+                            <p class="result-label">Avg Iterations/Panel</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-value">30</p>
+                            <p class="result-label">Max Iterations</p>
+                        </div>
                     </div>
                 </div>
                 
@@ -1635,7 +1921,7 @@
                     </p>
                     
                     <!-- NEW: Calibration Gap Chart (Figure 5.2/5.3) -->
-                    <img src="assets/storyboard/stb-calibration-gap.png" alt="Bar chart comparing AI self-reported scores (84.4%) versus expert-validated actual success rates (47.2%), showing the 37.2% calibration gap" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-bottom: 12px;">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-calibration-gap.png" alt="Bar chart comparing AI self-reported scores (84.4%) versus expert-validated actual success rates (47.2%), showing the 37.2% calibration gap" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-bottom: 12px;">
                     <p class="process-caption">Figure 5.3: The 37.2% gap between what AI models report and actual positioning quality.</p>
                 </div>
                 
@@ -1651,8 +1937,9 @@
                                 <tr style="border-bottom: 1px solid var(--bg-tertiary);">
                                     <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Model</th>
                                     <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Actual Success</th>
-                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Self-Reported</th>
                                     <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Calibration Error</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Avg Iterations</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Convergence</th>
                                     <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Time/Panel</th>
                                     <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Cost/Panel</th>
                                 </tr>
@@ -1661,30 +1948,34 @@
                                 <tr style="border-bottom: 1px solid var(--bg-tertiary);">
                                     <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">Claude Sonnet 4.5</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--accent-success); font-weight: 600;">83.3%</td>
-                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">84.8%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--accent-success);">+1.5%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">22.2</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">41.7%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">69.1 min</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.94</td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid var(--bg-tertiary);">
                                     <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">LLaVA-13B</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--accent-warning); font-weight: 600;">41.7%</td>
-                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">84.6%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--accent-warning);">+42.9%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">7.8</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">91.7%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">7.8 min</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.00</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 12px 8px; color: var(--text-primary); font-weight: 500;">ChatGPT-4o</td>
                                     <td style="text-align: center; padding: 12px 8px; color: #ef4444; font-weight: 600;">16.7%</td>
-                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">83.8%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: #ef4444;">+67.1%</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">12.5</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">75.0%</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">33.7 min</td>
                                     <td style="text-align: center; padding: 12px 8px; color: var(--text-muted);">$0.25</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    <p class="process-caption" style="margin-top: 8px;">Table 5.4: Expert manual positioning baseline: 1.7 min/panel. Automated time ranges 4.6–41× longer but runs unattended.</p>
                 </div>
                 
                 <!-- NEW: Cost vs Quality Tradeoff (Figure 6.1) -->
@@ -1693,7 +1984,7 @@
                     <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
                         Three-dimensional tradeoff visualization for production decision-making: cost per scene, processing time, and expert-validated success rate.
                     </p>
-                    <img src="assets/storyboard/stb-cost-quality.png" alt="3D scatter plot showing cost ($0-0.94), time (7.8-69.1 min), and quality (16.7-83.3%) tradeoffs across Claude, LLaVA, and ChatGPT-4o" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-cost-quality.png" alt="3D scatter plot showing cost ($0-0.94), time (7.8-69.1 min), and quality (16.7-83.3%) tradeoffs across Claude, LLaVA, and ChatGPT-4o" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                     <p class="process-caption" style="margin-top: 8px;">Figure 6.1: Claude achieves highest quality (83.3%) at highest cost ($0.94/panel). LLaVA offers free local inference with moderate success (41.7%).</p>
                 </div>
                 
@@ -1703,7 +1994,7 @@
                     <p class="modal-section-content" style="margin-bottom: 16px; font-size: 13px; color: var(--text-muted);">
                         Granular success comparison across all 12 test panels × 3 models reveals per-scenario performance patterns.
                     </p>
-                    <img src="assets/storyboard/stb-panel-comparison.png" alt="Detailed chart showing success/failure for each of 12 storyboard panels across Claude, ChatGPT-4o, and LLaVA models" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-panel-comparison.png" alt="Detailed chart showing success/failure for each of 12 storyboard panels across Claude, ChatGPT-4o, and LLaVA models" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                     <p class="process-caption" style="margin-top: 8px;">Figure 5.1: Panel-by-panel success patterns showing model-specific strengths and failure modes.</p>
                 </div>
                 
@@ -1713,25 +2004,29 @@
                     <p class="modal-section-content" style="margin-bottom: 16px;">
                         All three models failed positioning on the same geometry, yet reported dramatically different confidence scores. ChatGPT-4o and LLaVA-13B scored 85/100 claiming "nearly perfect" positioning with "no visibility issues." Claude scored 70/100 and correctly identified "CRITICAL MISMATCH" with camera occlusion by bench.
                     </p>
-                    <img src="assets/storyboard/stb-hallucination.png" alt="Panel 9 case study: ChatGPT-4o and LLaVA scored 85/100 for failed positioning, while Claude scored 70/100 and identified the critical bench occlusion error" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
+                    <img loading="lazy" decoding="async" src="assets/storyboard/stb-hallucination.png" alt="Panel 9 case study: ChatGPT-4o and LLaVA scored 85/100 for failed positioning, while Claude scored 70/100 and identified the critical bench occlusion error" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
                     <p class="process-caption" style="margin-top: 8px;">Panel 9: Identical geometry, divergent AI assessments. Only Claude identified the critical occlusion failure.</p>
                 </div>
                 
                 <!-- Key Contributions -->
                 <div class="modal-section">
                     <p class="modal-section-title">Research Contributions</p>
-                    <div style="display: grid; gap: 12px;">
-                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
-                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">System Contribution</p>
-                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Minimum viable product demonstrating automated storyboard-to-3D conversion with modular AI provider abstraction.</p>
+                    <div class="info-card-grid">
+                        <div class="info-card">
+                            <p class="info-card-title">System Contribution</p>
+                            <p class="info-card-content">First minimum viable product achieving automated storyboard-to-3D positioning using a 3D asset library in Unreal Engine with modular AI provider abstraction.</p>
                         </div>
-                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
-                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">Research Contribution</p>
-                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Discovery and documentation of AI Score Hallucination—systematic over-confidence in VLM spatial reasoning with implications for autonomous termination logic.</p>
+                        <div class="info-card">
+                            <p class="info-card-title">Research Contribution</p>
+                            <p class="info-card-content">Discovery and documentation of AI Score Hallucination—systematic over-confidence in VLM spatial reasoning (37.2% calibration gap) with implications for any AI system using autonomous termination logic.</p>
                         </div>
-                        <div style="background: var(--bg-secondary); border: 1px solid var(--bg-tertiary); border-radius: 8px; padding: 16px;">
-                            <p style="color: var(--accent-primary); font-weight: 600; font-size: 13px; margin-bottom: 6px;">Architecture Contribution</p>
-                            <p style="color: var(--text-secondary); font-size: 14px; margin: 0;">Seven-viewpoint sequential capture system providing comprehensive spatial context for AI analysis of positioning errors.</p>
+                        <div class="info-card">
+                            <p class="info-card-title">Architecture Contribution</p>
+                            <p class="info-card-content">Seven-viewpoint sequential capture system providing comprehensive spatial context for AI analysis, exposing depth misjudgments, occlusion issues, and rotation errors invisible from single viewpoints.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Methodological Contribution</p>
+                            <p class="info-card-content">MVP evaluation methodology that reframes value proposition from "accelerating hands-on workflows" to "enabling time-shifted automated positioning" for users lacking technical artist expertise.</p>
                         </div>
                     </div>
                 </div>
@@ -1767,13 +2062,13 @@
         </div>
     </div>
     <!-- MODAL: AI Mocap Pipeline -->
-    <div class="modal-overlay" id="modal-ai-mocap">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-ai-mocap" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
             <div class="modal-hero">
-                <img src="assets/aimocap/07_pipeline_diagram.png" alt="AI Character to Mocap Pipeline: Reference → AI Generation → Artist Refinement → Motion Capture → Unreal Engine" style="width: 100%; height: 100%; object-fit: contain; background: var(--bg-secondary);">
+                <img loading="lazy" decoding="async" src="assets/aimocap/07_pipeline_diagram.png" alt="AI Character to Mocap Pipeline: Reference → AI Generation → Artist Refinement → Motion Capture → Unreal Engine" style="width: 100%; height: 100%; object-fit: contain; background: var(--bg-secondary);">
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">AI Character to Mocap Pipeline</h2>
@@ -1815,21 +2110,21 @@
                     <p class="modal-section-title">Process</p>
                     <div class="process-grid">
                         <div class="process-item">
-                            <img src="assets/aimocap/01_reference_photo.jpeg" alt="Reference photo of dog" onclick="openLightbox(this.src)">
+                            <img loading="lazy" decoding="async" src="assets/aimocap/01_reference_photo.jpeg" alt="Reference photo of dog" onclick="openLightbox(this.src)">
                             <p class="process-caption">Reference photo</p>
                         </div>
                         <div class="process-item">
-                            <img src="assets/aimocap/02_ai_concept.png" alt="AI-generated character concept from ChatGPT" onclick="openLightbox(this.src)">
+                            <img loading="lazy" decoding="async" src="assets/aimocap/02_ai_concept.png" alt="AI-generated character concept from ChatGPT" onclick="openLightbox(this.src)">
                             <p class="process-caption">AI concept (ChatGPT)</p>
                         </div>
                     </div>
                     <div class="process-grid" style="margin-top: 16px;">
                         <div class="process-item">
-                            <img src="assets/aimocap/03_rodin_raw.png" alt="Raw 3D mesh from Rodin AI" onclick="openLightbox(this.src)">
+                            <img loading="lazy" decoding="async" src="assets/aimocap/03_rodin_raw.png" alt="Raw 3D mesh from Rodin AI" onclick="openLightbox(this.src)">
                             <p class="process-caption">Rodin AI output</p>
                         </div>
                         <div class="process-item">
-                            <img src="assets/aimocap/04_maya_cleanup.png" alt="Cleaned up mesh in Maya with proper topology" onclick="openLightbox(this.src)">
+                            <img loading="lazy" decoding="async" src="assets/aimocap/04_maya_cleanup.png" alt="Cleaned up mesh in Maya with proper topology" onclick="openLightbox(this.src)">
                             <p class="process-caption">Maya remesh & cleanup</p>
                         </div>
                     </div>
@@ -1837,9 +2132,9 @@
 
                 <div class="modal-section">
                     <p class="modal-section-title">Facial Setup</p>
-                    <img src="assets/aimocap/05_face_detail.jpg" alt="Face detail showing teeth and tongue geometry" style="width: 100%; border-radius: 8px; margin-bottom: 12px;" onclick="openLightbox(this.src)">
+                    <img loading="lazy" decoding="async" src="assets/aimocap/05_face_detail.jpg" alt="Face detail showing teeth and tongue geometry" style="width: 100%; border-radius: 8px; margin-bottom: 12px;" onclick="openLightbox(this.src)">
                     <p class="process-caption" style="margin-bottom: 16px;">Mouth interior: teeth, tongue, and gums for facial capture</p>
-                    <img src="assets/aimocap/06_blend_shapes.jpg" alt="Facial blend shapes showing six expressions: Sad, Happy, Angry, Surprise, Fear, Disgust" style="width: 100%; border-radius: 8px;" onclick="openLightbox(this.src)">
+                    <img loading="lazy" decoding="async" src="assets/aimocap/06_blend_shapes.jpg" alt="Facial blend shapes showing six expressions: Sad, Happy, Angry, Surprise, Fear, Disgust" style="width: 100%; border-radius: 8px;" onclick="openLightbox(this.src)">
                     <p class="process-caption">Blend shapes for ARKit-compatible facial capture</p>
                 </div>
 
@@ -1859,13 +2154,19 @@
     </div>
     
     <!-- MODAL: Robot Game -->
-    <div class="modal-overlay" id="modal-robot">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-robot" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
-            <div class="modal-hero">
-                <div class="placeholder">[VIDEO: Gameplay showing voice commands]</div>
+            <div class="modal-hero portrait">
+                <div class="portrait-video-container">
+                    <iframe loading="lazy" src="https://player.vimeo.com/video/1154736103?badge=0&autopause=0&player_id=0&app_id=58479&loop=1&autoplay=1&muted=1" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                            title="Titan Arena Demo">
+                    </iframe>
+                </div>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">Voice-Controlled Robot Combat</h2>
@@ -1921,8 +2222,8 @@
     WIX: Lightbox with input field and buttons
     =====================================================================
     -->
-    <div class="modal-overlay" id="modal-password">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-password" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content password-modal">
@@ -1930,11 +2231,13 @@
                 <h2 class="modal-title">Password Protected</h2>
                 <p>This work is under NDA. Enter password to view.</p>
                 
+                <label for="password-input" class="visually-hidden">Password</label>
                 <input 
                     type="password" 
                     id="password-input" 
                     class="password-input" 
                     placeholder="Enter password"
+                    autocomplete="off"
                     onkeypress="if(event.key === 'Enter') checkPassword()"
                 >
                 
@@ -1951,8 +2254,8 @@
     </div>
     
     <!-- MODAL: Burlington (Password Protected) -->
-    <div class="modal-overlay" id="modal-burlington">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-burlington" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
@@ -1962,12 +2265,12 @@
                 </video>
             </div>
             <div class="modal-body">
-                <h2 class="modal-title">Burlington Public Sculpture</h2>
+                <h2 class="modal-title">Real-Time Visualization Pipeline</h2>
                 
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
-                        <span class="modal-meta-value">3D Visualization Artist</span>
+                        <span class="modal-meta-value">Technical Artist / Pipeline Developer</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Client:</span>
@@ -1980,42 +2283,49 @@
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">The Project</p>
+                    <p class="modal-section-title">Technical Challenge</p>
                     <p class="modal-section-content">
-                        Converted artist sketches into photorealistic 3D sculpture visualization 
-                        placed in realistic downtown Burlington environment. Visualization was 
-                        presented to city council and approved for construction. The sculpture 
-                        has since been fabricated and installed.
+                        Built a real-time visualization pipeline for architectural review. Integrated 
+                        Google 3D Tiles via Cesium for accurate geospatial site placement in downtown 
+                        Burlington. Developed day/night lighting system with UE5 path tracing to show 
+                        how the sculpture would interact with actual environmental lighting conditions. 
+                        Pipeline enabled rapid iteration during city council presentation.
                     </p>
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">Visualization</p>
+                    <p class="modal-section-title">Day/Night Lighting System</p>
                     <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
                         <div>
                             <div class="process-item">
-                                <img src="assets/burlington/burl-day.png" alt="Burlington sculpture day render">
+                                <img loading="lazy" decoding="async" src="assets/burlington/burl-day.png" alt="Burlington sculpture day render">
                             </div>
-                            <p class="process-caption">Day visualization</p>
+                            <p class="process-caption">Path-traced daylight GI</p>
                         </div>
                         <div>
                             <div class="process-item">
-                                <img src="assets/burlington/burl-night.png" alt="Burlington sculpture night render">
+                                <img loading="lazy" decoding="async" src="assets/burlington/burl-night.png" alt="Burlington sculpture night render">
                             </div>
-                            <p class="process-caption">Night visualization</p>
+                            <p class="process-caption">Night with street lighting</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">Installed</p>
-                    <img src="assets/burlington/burl-installed.jpeg" alt="Burlington sculpture installed" style="width: 100%; border-radius: 8px;">
+                    <p class="modal-section-title">Result: Built</p>
+                    <img loading="lazy" decoding="async" src="assets/burlington/burl-installed.jpeg" alt="Burlington sculpture installed" style="width: 100%; border-radius: 8px;">
+                    <p class="modal-section-content" style="margin-top: 12px; font-size: 13px; color: var(--text-muted);">
+                        Visualization approved by city council. Sculpture fabricated and installed on site.
+                    </p>
                 </div>
                 
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
-                        <span class="tool-tag">Unreal Engine 5</span>
+                        <span class="tool-tag">Unreal Engine 5.1</span>
+                        <span class="tool-tag">Path Tracing</span>
+                        <span class="tool-tag">Cesium for Unreal</span>
+                        <span class="tool-tag">Google 3D Tiles</span>
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Substance Painter</span>
                     </div>
@@ -2025,13 +2335,13 @@
     </div>
     
     <!-- MODAL: Nike (Password Protected) -->
-    <div class="modal-overlay" id="modal-nike">
-        <button class="modal-close" onclick="closeModal()">
+    <div class="modal-overlay" id="modal-nike" aria-hidden="true" role="dialog">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <div class="modal-content">
             <div class="modal-hero">
-                <iframe src="https://player.vimeo.com/video/1152659002?autoplay=1&loop=1&muted=1&background=1" 
+                <iframe loading="lazy" src="https://player.vimeo.com/video/1152659002?autoplay=1&loop=1&muted=1&background=1" 
                         frameborder="0" 
                         allow="autoplay; fullscreen" 
                         allowfullscreen
@@ -2076,17 +2386,17 @@
                     <div class="process-grid" style="grid-template-columns: repeat(3, 1fr);">
                         <div>
                             <div class="process-item">
-                                <img src="assets/nike/nike-color-1.png" alt="Nike colorway 1">
+                                <img loading="lazy" decoding="async" src="assets/nike/nike-color-1.png" alt="Nike colorway 1">
                             </div>
                         </div>
                         <div>
                             <div class="process-item">
-                                <img src="assets/nike/nike-color-2.png" alt="Nike colorway 2">
+                                <img loading="lazy" decoding="async" src="assets/nike/nike-color-2.png" alt="Nike colorway 2">
                             </div>
                         </div>
                         <div>
                             <div class="process-item">
-                                <img src="assets/nike/nike-color-3.png" alt="Nike colorway 3">
+                                <img loading="lazy" decoding="async" src="assets/nike/nike-color-3.png" alt="Nike colorway 3">
                             </div>
                         </div>
                     </div>
@@ -2095,10 +2405,17 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
+                        <span class="tool-tag">Unreal Engine 5</span>
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Substance Painter</span>
-                        <span class="tool-tag">Marmoset Toolbag</span>
                     </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Asset Credit</p>
+                    <p class="modal-section-content" style="font-size: 13px;">
+                        Base shoe model: <a href="https://www.cgtrader.com/3d-models/character/clothing/air-force-1-low-nike-pbr" target="_blank" style="color: var(--accent-primary);">Air Force 1 Low Nike PBR</a> by aimadbro (CGTrader). Texturing, materials, lighting, and rendering by Tyler Varacchi.
+                    </p>
                 </div>
             </div>
         </div>
@@ -2111,11 +2428,16 @@
     =====================================================================
     -->
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Enable JS-dependent styles
+        document.documentElement.classList.add('js-enabled');
+        document.body.classList.add('js-enabled');
+        
         // Track which protected modal to open after password
         let pendingModal = null;
         
         // Password for protected content
-        // CHANGE THIS to your actual password
+        // NOTE: Client-side only - not real security, just NDA compliance
+        // For actual security, implement server-side authentication
         const PORTFOLIO_PASSWORD = 'portfolio2026';
         
         // Open a regular modal
@@ -2123,6 +2445,11 @@
             const modal = document.getElementById('modal-' + modalId);
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Focus the modal for accessibility
+            modal.setAttribute('aria-hidden', 'false');
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn) closeBtn.focus();
             
             // Ensure videos play (autoplay can be blocked after interactions)
             modal.querySelectorAll('video').forEach(video => {
@@ -2167,14 +2494,22 @@
                     video.currentTime = 0;
                 });
                 
-                // Reset iframes (Vimeo, Sketchfab) by reloading src
+                // Stop iframes by removing and restoring src
+                // This prevents background playback of Vimeo/Sketchfab embeds
                 modal.querySelectorAll('iframe').forEach(iframe => {
-                    const src = iframe.src;
-                    iframe.src = '';
-                    iframe.src = src;
+                    const src = iframe.getAttribute('src');
+                    if (src) {
+                        iframe.setAttribute('data-src', src);
+                        iframe.removeAttribute('src');
+                        // Restore after modal transition completes
+                        setTimeout(() => {
+                            iframe.setAttribute('src', iframe.getAttribute('data-src'));
+                        }, 300);
+                    }
                 });
                 
                 modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
             });
             document.body.style.overflow = '';
         }
@@ -2216,11 +2551,52 @@
                 img.onclick = () => openLightbox(img.src);
             }
         });
+        
+        // Sticky Navigation - show after scrolling past hero
+        const stickyNav = document.getElementById('sticky-nav');
+        const heroSection = document.getElementById('home');
+        
+        function handleStickyNav() {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            if (window.scrollY > heroBottom - 100) {
+                stickyNav.classList.add('visible');
+            } else {
+                stickyNav.classList.remove('visible');
+            }
+        }
+        
+        window.addEventListener('scroll', handleStickyNav, { passive: true });
+        
+        // Entrance Animations - Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -100px 0px', // Trigger when element is 100px into viewport
+            threshold: 0.1
+        };
+        
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe work cards for staggered entrance
+        document.querySelectorAll('.work-card').forEach(card => {
+            animationObserver.observe(card);
+        });
+        
+        // Observe sections for fade-in
+        document.querySelectorAll('.section-label, .about-bio, .skill-category').forEach(el => {
+            el.classList.add('animate-on-scroll');
+            animationObserver.observe(el);
+        });
     </script>
     
     <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" onclick="closeLightbox()">
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()" role="dialog" aria-hidden="true" aria-label="Image viewer">
+        <button type="button" class="lightbox-close" onclick="closeLightbox()" aria-label="Close image viewer">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
         <img id="lightbox-img" src="" alt="Enlarged view">
