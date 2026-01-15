@@ -1773,11 +1773,11 @@
         </button>
         <div class="modal-content">
             <div class="modal-hero">
-                <div class="placeholder">[VIDEO: Full workflow, concept → mocap-ready character]</div>
+                <img src="assets/aimocap/07_pipeline_diagram.png" alt="AI Character to Mocap Pipeline: Reference → AI Generation → Artist Refinement → Motion Capture → Unreal Engine" style="width: 100%; height: 100%; object-fit: contain; background: var(--bg-secondary);">
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">AI Character to Mocap Pipeline</h2>
-                
+
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
@@ -1792,32 +1792,66 @@
                         <span class="modal-meta-value">~1 Hour End-to-End</span>
                     </div>
                 </div>
-                
+
                 <div class="modal-section">
                     <p class="modal-section-title">The Problem</p>
                     <p class="modal-section-content">
-                        Traditional character pipelines (concept → model → rig → mocap setup) take 
-                        days to weeks. Small teams and indie developers can't afford this for 
+                        Traditional character pipelines (concept → model → rig → mocap setup) take
+                        days to weeks. Small teams and indie developers can't afford this for
                         prototyping or rapid content creation.
                     </p>
                 </div>
-                
+
                 <div class="modal-section">
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
-                        Developed a workflow using AI-assisted modeling (Rodin AI) combined with 
-                        automatic rigging to produce mocap-ready characters with dynamics (tail simulation) 
-                        in approximately one hour. Demonstrated full integration with Xsens capture system.
+                        Developed a workflow using AI-assisted modeling (Rodin AI) combined with
+                        automatic rigging to produce mocap-ready characters with dynamics (tail simulation)
+                        in approximately one hour. Demonstrated full integration with Rokoko capture system.
                     </p>
                 </div>
-                
+
+                <div class="modal-section">
+                    <p class="modal-section-title">Process</p>
+                    <div class="process-grid">
+                        <div class="process-item">
+                            <img src="assets/aimocap/01_reference_photo.jpeg" alt="Reference photo of dog" onclick="openLightbox(this.src)">
+                            <p class="process-caption">Reference photo</p>
+                        </div>
+                        <div class="process-item">
+                            <img src="assets/aimocap/02_ai_concept.png" alt="AI-generated character concept from ChatGPT" onclick="openLightbox(this.src)">
+                            <p class="process-caption">AI concept (ChatGPT)</p>
+                        </div>
+                    </div>
+                    <div class="process-grid" style="margin-top: 16px;">
+                        <div class="process-item">
+                            <img src="assets/aimocap/03_rodin_raw.png" alt="Raw 3D mesh from Rodin AI" onclick="openLightbox(this.src)">
+                            <p class="process-caption">Rodin AI output</p>
+                        </div>
+                        <div class="process-item">
+                            <img src="assets/aimocap/04_maya_cleanup.png" alt="Cleaned up mesh in Maya with proper topology" onclick="openLightbox(this.src)">
+                            <p class="process-caption">Maya remesh & cleanup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section">
+                    <p class="modal-section-title">Facial Setup</p>
+                    <img src="assets/aimocap/05_face_detail.jpg" alt="Face detail showing teeth and tongue geometry" style="width: 100%; border-radius: 8px; margin-bottom: 12px;" onclick="openLightbox(this.src)">
+                    <p class="process-caption" style="margin-bottom: 16px;">Mouth interior: teeth, tongue, and gums for facial capture</p>
+                    <img src="assets/aimocap/06_blend_shapes.jpg" alt="Facial blend shapes showing six expressions: Sad, Happy, Angry, Surprise, Fear, Disgust" style="width: 100%; border-radius: 8px;" onclick="openLightbox(this.src)">
+                    <p class="process-caption">Blend shapes for ARKit-compatible facial capture</p>
+                </div>
+
                 <div class="modal-section">
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
+                        <span class="tool-tag">ChatGPT</span>
                         <span class="tool-tag">Rodin AI</span>
+                        <span class="tool-tag">Maya</span>
+                        <span class="tool-tag">Substance Painter</span>
                         <span class="tool-tag">Unreal Engine 5</span>
-                        <span class="tool-tag">Xsens MVN</span>
-                        <span class="tool-tag">Auto-Rigging</span>
+                        <span class="tool-tag">Rokoko</span>
                     </div>
                 </div>
             </div>
