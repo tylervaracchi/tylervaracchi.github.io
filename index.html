@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tyler Varacchi - Technical Artist specializing in real-time pipelines, motion capture, and AI integration. Led mocap pipeline at SuperPlastic (232M+ views). MS Digital Media, Drexel University.">
+    <meta name="description" content="Tyler Varacchi - Technical Artist specializing in real-time pipelines, motion capture, and AI integration. MS Digital Media, Drexel University.">
     <title>Tyler Varacchi | Technical Artist</title>
     
     <!-- 
@@ -16,7 +16,7 @@
     2. WORK GRID - 6 project thumbnails (GIF recommended)
     3. PROJECT MODALS - Click-through detail pages
     4. SKILLS - Tiered (Expert/Professional/Familiar)
-    5. ABOUT - Bio, education, validation
+    5. ABOUT - Bio, resume download
     6. FOOTER - Contact info
     
     TO CUSTOMIZE:
@@ -134,7 +134,7 @@
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         
         /* 
@@ -150,11 +150,10 @@
         =====================================================================
         */
         .hero {
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 120px 0 80px;
+            padding: 60px 0 24px;
             position: relative;
         }
         
@@ -168,27 +167,28 @@
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.1;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
         
         .hero-title {
             font-size: clamp(18px, 3vw, 24px);
             font-weight: 400;
             color: var(--text-secondary);
-            margin-bottom: 32px;
+            margin-bottom: 8px;
         }
         
-        /* Metric highlight - makes 232M stand out */
-        .hero-title .metric {
-            color: var(--text-primary);
-            font-weight: 600;
+        .hero-specializations {
+            font-size: clamp(14px, 2vw, 16px);
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 20px;
         }
         
         .hero-links {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 48px;
+            gap: 12px;
+            margin-bottom: 0;
         }
         
         .hero-link {
@@ -202,7 +202,10 @@
             color: var(--text-secondary);
             font-size: 14px;
             font-weight: 500;
+            font-family: var(--font-display);
             transition: all var(--transition-fast);
+            cursor: pointer;
+            text-decoration: none;
         }
         
         .hero-link:hover {
@@ -259,6 +262,7 @@
         */
         .work-section {
             border-top: 1px solid var(--bg-tertiary);
+            padding-top: 24px;
         }
         
         .work-grid {
@@ -794,11 +798,8 @@
         
         /* 
         =====================================================================
-        SECTION 5: ABOUT + EDUCATION
+        SECTION 5: ABOUT
         - 2-3 sentence bio (82% of TAs)
-        - Current focus stated (54% of TAs)
-        - Education with GPA (43% - only if high)
-        - External validation (89% of TAs)
         - Resume PDF download (75% of TAs)
         
         WIX: Use text elements and button for download
@@ -833,12 +834,6 @@
             font-weight: 600;
         }
         
-        .about-current {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-        }
-        
         .resume-button {
             display: inline-flex;
             align-items: center;
@@ -861,37 +856,15 @@
         }
         
         .education-degree {
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: 600;
             color: var(--text-primary);
-            font-weight: 500;
+            margin-bottom: 4px;
         }
         
         .education-school {
             font-size: 14px;
             color: var(--text-muted);
-        }
-        
-        .validation-list {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid var(--bg-tertiary);
-        }
-        
-        .validation-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-        
-        .validation-item svg {
-            width: 16px;
-            height: 16px;
-            color: var(--accent-success);
-            flex-shrink: 0;
-            margin-top: 3px;
         }
         
         /* 
@@ -905,7 +878,6 @@
         =====================================================================
         */
         .footer {
-            border-top: 1px solid var(--bg-tertiary);
             padding: 48px 0;
             text-align: center;
         }
@@ -921,37 +893,6 @@
             font-size: 16px;
             color: var(--accent-primary);
             margin-bottom: 24px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        
-        .footer-link {
-            width: 44px;
-            height: 44px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--bg-tertiary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-        }
-        
-        .footer-link:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border-color: var(--text-muted);
-        }
-        
-        .footer-link svg {
-            width: 20px;
-            height: 20px;
         }
         
         .footer-location {
@@ -1235,17 +1176,20 @@
                 <!-- Name - 100% of TAs display prominently -->
                 <h1 class="hero-name">Tyler Varacchi</h1>
                 
-                <!-- Title with quantified metric - 96% have title, 36% quantify -->
+                <!-- Title + specializations -->
                 <p class="hero-title">
-                    Pipeline & Mocap Technical Artist · <span class="metric">232M+ Views Shipped</span>
+                    Technical Artist
+                </p>
+                <p class="hero-specializations">
+                    Real-time pipelines · Motion capture · AI integration
                 </p>
                 
                 <!-- Contact links - 89% of TAs include in hero -->
                 <div class="hero-links">
-                    <a href="/cdn-cgi/l/email-protection#88fcf1e4edfafee9fae9ebebe0e1c8efe5e9e1e4a6ebe7e5" class="hero-link">
+                    <button type="button" class="hero-link" id="email-btn" onclick="copyEmail()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                        Email
-                    </a>
+                        <span id="email-text">Email</span>
+                    </button>
                     <a href="https://www.linkedin.com/in/tyler-varacchi" class="hero-link" target="_blank" rel="noopener noreferrer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                         LinkedIn
@@ -1272,7 +1216,6 @@
     -->
     <section class="work-section section" id="work">
         <div class="container">
-            <p class="section-label">Selected Work</p>
             
             <div class="work-grid">
                 <!-- 
@@ -1286,7 +1229,7 @@
                         </video>
                     </div>
                     <h3 class="work-card-title">SuperPlastic Real-Time Pipeline</h3>
-                    <p class="work-card-role">Lead Technical Artist · 232M+ views</p>
+                    <p class="work-card-role">Lead Technical Artist · UE5 · Mocap · 232M+ Views</p>
                 </div>
                 
                 <!-- 
@@ -1301,7 +1244,7 @@
                         </video>
                     </div>
                     <h3 class="work-card-title">StoryboardTo3D</h3>
-                    <p class="work-card-role">AI Research · Committee Recommended for SIGGRAPH 2026</p>
+                    <p class="work-card-role">AI Research · UE5 Plugin · MS Thesis</p>
                 </div>
                 
                 <!-- 
@@ -1312,8 +1255,8 @@
                     <div class="work-thumbnail">
                         <img loading="lazy" decoding="async" src="assets/thumbnails/thumb-burlington.jpeg" alt="Burlington public sculpture render">
                     </div>
-                    <h3 class="work-card-title">Real-Time Visualization Pipeline</h3>
-                    <p class="work-card-role">UE5 Path Tracing · Cesium Geospatial · Built</p>
+                    <h3 class="work-card-title">Public Sculpture Visualization</h3>
+                    <p class="work-card-role">Visualization Artist · UE5 · Cesium · Built</p>
                 </div>
                 
                 <!-- 
@@ -1331,7 +1274,7 @@
                         </div>
                     </div>
                     <h3 class="work-card-title">VictorVictor × Nike</h3>
-                    <p class="work-card-role">Product Visualization · NDA</p>
+                    <p class="work-card-role">Product Visualization · UE5 · NDA</p>
                 </div>
                 
                 <!-- 
@@ -1340,16 +1283,18 @@
                 -->
                 <div class="work-card" onclick="openModal('ai-mocap')">
                     <div class="work-thumbnail">
-                        <!-- REPLACE: GIF of AI character in mocap -->
-                        <div class="placeholder">[GIF: AI → Rigged → Mocap]</div>
+                        <!-- NEED: Character turnaround or mocap clip -->
+                        <div style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 200px;">
+                            <p style="color: var(--text-muted); font-size: 12px;">NEED: Thumbnail video</p>
+                        </div>
                     </div>
                     <h3 class="work-card-title">AI Character to Mocap</h3>
-                    <p class="work-card-role">Workflow R&D · 1-Hour Pipeline</p>
+                    <p class="work-card-role">AI + Mocap · 24-Hour Pipeline</p>
                 </div>
                 
                 <!-- 
                 PROJECT 6: Robot Voice Game
-                Shows range beyond mocap
+                Accessibility-focused design research
                 -->
                 <div class="work-card" onclick="openModal('robot')">
                     <div class="work-thumbnail">
@@ -1358,7 +1303,7 @@
                         </video>
                     </div>
                     <h3 class="work-card-title">Voice-Controlled Combat</h3>
-                    <p class="work-card-role">Unity Game · Novel Input</p>
+                    <p class="work-card-role">Unity · Accessible Input Design</p>
                 </div>
             </div>
         </div>
@@ -1454,17 +1399,10 @@
                 <div>
                     <!-- Bio - 82% keep it 2-3 sentences -->
                     <p class="about-bio">
-                        <strong>Technical Artist with 4+ years of production experience.</strong> 
-                        Built the real-time mocap pipeline at SuperPlastic that shipped 256+ videos 
-                        to 232M views (1M subscribers in one month). 
-                        Led 5 artists from offline to real-time UE5 rendering.
-                    </p>
-                    
-                    <!-- Current focus - 54% state this -->
-                    <p class="about-current">
-                        Currently focused on AI-assisted content creation workflows. 
-                        Looking for Technical Artist or Creative Technologist roles. 
-                        Open to relocation.
+                        <strong>I'm a Technical Artist specializing in real-time pipelines, motion capture, and tool development.</strong> 
+                        Built SuperPlastic's UE5 mocap pipeline and helped transition 5 artists from offline rendering. 
+                        Wrote C++ retargeting tools when Maya deformers broke in-engine. 
+                        Currently building AI tools for 3D scene generation.
                     </p>
                     
                     <!-- Resume download - 75% include this -->
@@ -1480,42 +1418,12 @@
                     
                     <div class="education-item">
                         <p class="education-degree">M.S. Digital Media</p>
-                        <p class="education-school">Drexel University · 3.97 GPA · Dec 2025</p>
+                        <p class="education-school">Drexel University · 3.97 GPA</p>
                     </div>
                     
                     <div class="education-item">
                         <p class="education-degree">B.A. Art and Design</p>
-                        <p class="education-school">University of Vermont · 3.5 GPA · 2022</p>
-                    </div>
-                    
-                    <!-- Validation - 89% show external proof -->
-                    <div class="validation-list">
-                        <p class="section-label">Validation</p>
-                        
-                        <div class="validation-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Committee recommended for SIGGRAPH 2026 submission
-                        </div>
-                        
-                        <div class="validation-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Original finding: 37% AI confidence calibration gap
-                        </div>
-                        
-                        <div class="validation-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            1M YouTube subscribers in 1 month (SuperPlastic)
-                        </div>
-                        
-                        <div class="validation-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Burlington sculpture approved by city council and built
-                        </div>
-                        
-                        <div class="validation-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd"/></svg>
-                            Guest Lecturer, UVM (2 semesters)
-                        </div>
+                        <p class="education-school">University of Vermont · 3.5 GPA</p>
                     </div>
                 </div>
             </div>
@@ -1532,27 +1440,9 @@
         <div class="container">
             <p class="footer-name">Tyler Varacchi</p>
             <p class="footer-email">
-                <a href="/cdn-cgi/l/email-protection#d9ada0b5bcabafb8abb8babab1b099beb4b8b0b5f7bab6b4"><span class="__cf_email__" data-cfemail="7a0e03161f080c1b081b191912133a1d171b131654191517">[email&#160;protected]</span></a>
+                <a href="mailto:tyler@varacchi.com">tyler@varacchi.com</a>
             </p>
-            
-            <!-- Social links - 89% include these -->
-            <div class="footer-links">
-                <a href="https://www.linkedin.com/in/tyler-varacchi" class="footer-link" target="_blank" title="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                </a>
-                <a href="https://github.com/tylervaracchi" class="footer-link" target="_blank" title="GitHub">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                </a>
-                <a href="https://vimeo.com/850397863" class="footer-link" target="_blank" title="Vimeo">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8.64c-.09 2-.63 4.78-2.79 8.14-2.23 3.5-4.12 5.25-5.68 5.25-1.56 0-2.88-1.44-3.96-4.33-.72-2.64-1.44-5.29-2.16-7.93-.8-2.89-1.66-4.33-2.58-4.33-.2 0-.9.42-2.1 1.26L2 5.64c2.19-1.93 4.04-3.62 5.55-5.07 2.51-2.06 4.39-3.13 5.64-3.22 2.96-.29 4.78 1.74 5.46 6.08.73 4.67 1.24 7.58 1.52 8.71.85 3.86 1.78 5.78 2.79 5.78.79 0 1.97-1.25 3.54-3.74 1.57-2.49 2.41-4.38 2.52-5.68.22-2.14-.62-3.22-2.53-3.22-1.22 0-2.48.4-3.77 1.2.09-2.96 1.55-5.13 4.38-6.52"/></svg>
-                </a>
-                <a href="https://www.youtube.com/@tylervaracchi9413" class="footer-link" target="_blank" title="YouTube">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
-                </a>
-            </div>
-            
-            <!-- Location - 54% state this -->
-            <p class="footer-location">Burlington, VT · Open to relocation</p>
+            <p class="footer-location">Burlington, VT</p>
             <p class="footer-copyright">© 2026 Tyler Varacchi</p>
         </div>
     </footer>
@@ -1655,6 +1545,10 @@
                         <div class="info-card">
                             <p class="info-card-title">Pipeline & Tools</p>
                             <p class="info-card-content">Scaled Perforce to 10+ artists. Wrote Python tools for Maya including UV channel validator used by 5 artists.</p>
+                        </div>
+                        <div class="info-card">
+                            <p class="info-card-title">Animation & Mocap</p>
+                            <p class="info-card-content">Performed mocap sessions, cleaned capture data, added keyframe polish, and directed animation output for final delivery.</p>
                         </div>
                     </div>
                 </div>
@@ -1782,14 +1676,12 @@
             <div class="modal-body">
                 <h2 class="modal-title">StoryboardTo3D</h2>
                 
-                <!-- Publication Badge -->
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
-                    <div style="background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%); padding: 10px 16px; border-radius: 6px; display: inline-block;">
-                        <span style="color: white; font-weight: 600; font-size: 13px;">Committee Recommended for SIGGRAPH 2026</span>
-                    </div>
-                    <div style="background: var(--bg-secondary); border: 1px solid var(--accent-success); padding: 10px 16px; border-radius: 6px; display: inline-block;">
-                        <span style="color: var(--accent-success); font-weight: 600; font-size: 13px;">✓ Full Thesis Now Available</span>
-                    </div>
+                <!-- Thesis Download -->
+                <div style="margin-bottom: 24px;">
+                    <a href="assets/storyboard/Varacchi_StoryboardTo3D_Thesis_2026.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--accent-primary); color: white; border-radius: 6px; font-weight: 500; font-size: 14px; text-decoration: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                        Download Full Thesis (PDF)
+                    </a>
                 </div>
                 
                 <div class="modal-meta">
@@ -1802,14 +1694,14 @@
                         <span class="modal-meta-value">MS Thesis, Drexel University</span>
                     </div>
                     <div class="modal-meta-item">
-                        <span class="modal-meta-label">Committee:</span>
-                        <span class="modal-meta-value">"One of the best theses they have seen"</span>
+                        <span class="modal-meta-label">Completed:</span>
+                        <span class="modal-meta-value">December 2025</span>
                     </div>
                 </div>
                 
-                <!-- Abstract -->
+                <!-- Overview -->
                 <div class="modal-section">
-                    <p class="modal-section-title">Abstract</p>
+                    <p class="modal-section-title">Overview</p>
                     <p class="modal-section-content">
                         Hand-drawn storyboards enable rapid visualization in animation and game development, but translating 2D sketches into 3D scenes requires considerable manual effort. This thesis presents StoryboardTo3D, an Unreal Engine 5.6 plugin that automates storyboard-to-3D translation using vision-language models. The system implements a multi-angle capture framework (7 viewpoints) and iterative positioning refinement with AI feedback loops.
                     </p>
@@ -2003,7 +1895,7 @@
                 
                 <!-- Key Contributions -->
                 <div class="modal-section">
-                    <p class="modal-section-title">Research Contributions</p>
+                    <p class="modal-section-title">Key Contributions</p>
                     <div class="info-card-grid">
                         <div class="info-card">
                             <p class="info-card-title">System Contribution</p>
@@ -2040,17 +1932,6 @@
                     </div>
                 </div>
                 
-                <!-- CTA -->
-                <div class="modal-section" style="background: var(--bg-secondary); padding: 24px; border-radius: 8px; border: 1px solid var(--bg-tertiary);">
-                    <p style="color: var(--text-primary); font-weight: 600; font-size: 15px; margin-bottom: 8px;">Full Thesis Available</p>
-                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 16px;">
-                        Complete methodology, architecture details, statistical analysis, and extended results across 124 pages.
-                    </p>
-                    <a href="assets/storyboard/Varacchi_StoryboardTo3D_Thesis_2026.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--accent-primary); color: white; border-radius: 6px; font-weight: 500; font-size: 14px; text-decoration: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                        Download Full Thesis (PDF)
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -2061,7 +1942,10 @@
         </button>
         <div class="modal-content">
             <div class="modal-hero">
-                <img loading="lazy" decoding="async" src="assets/aimocap/07_pipeline_diagram.png" alt="AI Character to Mocap Pipeline: Reference → AI Generation → Artist Refinement → Motion Capture → Unreal Engine" style="width: 100%; height: 100%; object-fit: contain; background: var(--bg-secondary);">
+                <!-- NEED: Turnaround video or mocap video of final character -->
+                <div style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                    <p style="color: var(--text-muted); font-size: 14px;">NEED: Character turnaround or mocap video</p>
+                </div>
             </div>
             <div class="modal-body">
                 <h2 class="modal-title">AI Character to Mocap Pipeline</h2>
@@ -2069,15 +1953,15 @@
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
-                        <span class="modal-meta-value">Developer</span>
+                        <span class="modal-meta-value">Solo Developer</span>
                     </div>
                     <div class="modal-meta-item">
-                        <span class="modal-meta-label">Type:</span>
-                        <span class="modal-meta-value">Workflow R&D</span>
+                        <span class="modal-meta-label">Context:</span>
+                        <span class="modal-meta-value">Personal R&D</span>
                     </div>
                     <div class="modal-meta-item">
-                        <span class="modal-meta-label">Time:</span>
-                        <span class="modal-meta-value">~1 Hour End-to-End</span>
+                        <span class="modal-meta-label">Completed:</span>
+                        <span class="modal-meta-value">Summer 2025</span>
                     </div>
                 </div>
 
@@ -2094,9 +1978,18 @@
                     <p class="modal-section-title">The Solution</p>
                     <p class="modal-section-content">
                         Developed a workflow using AI-assisted modeling (Rodin AI) combined with
-                        automatic rigging to produce mocap-ready characters with dynamics (tail simulation)
-                        in approximately one hour. Demonstrated full integration with Rokoko capture system.
+                        Advanced Skeleton rigging to produce mocap-ready characters with dynamics (tail simulation)
+                        in approximately 24 hours. Demonstrated full integration with Rokoko capture system.
                     </p>
+                    <img loading="lazy" decoding="async" src="assets/aimocap/07_pipeline_diagram.png" alt="AI Character to Mocap Pipeline diagram" style="width: 100%; border-radius: 8px; margin-top: 16px;">
+                </div>
+
+                <div class="modal-section">
+                    <p class="modal-section-title">Mocap Capture</p>
+                    <!-- NEED: Video of you doing mocap in Rokoko suit + resulting character animation side by side or spliced -->
+                    <div style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 200px; border-radius: 8px;">
+                        <p style="color: var(--text-muted); font-size: 14px;">NEED: Rokoko capture footage + character result</p>
+                    </div>
                 </div>
 
                 <div class="modal-section">
@@ -2121,6 +2014,19 @@
                             <p class="process-caption">Maya remesh & cleanup</p>
                         </div>
                     </div>
+                    <div class="process-grid" style="margin-top: 16px;">
+                        <div class="process-item">
+                            <img src="assets/aimocap/ai-mocap-rig.png" alt="Advanced Skeleton rig in Maya" style="width: 100%; border-radius: 8px;">
+                            <p class="process-caption">Advanced Skeleton rig</p>
+                        </div>
+                        <div class="process-item">
+                            <!-- NEED: Substance Painter clay render -->
+                            <div style="background: var(--bg-tertiary); border: 1px dashed var(--text-muted); display: flex; align-items: center; justify-content: center; min-height: 150px; border-radius: 8px;">
+                                <p style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 8px;">NEED: Clay render</p>
+                            </div>
+                            <p class="process-caption">Substance Painter clay</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-section">
@@ -2128,7 +2034,7 @@
                     <img loading="lazy" decoding="async" src="assets/aimocap/05_face_detail.jpg" alt="Face detail showing teeth and tongue geometry" style="width: 100%; border-radius: 8px; margin-bottom: 12px;" onclick="openLightbox(this.src)">
                     <p class="process-caption" style="margin-bottom: 16px;">Mouth interior: teeth, tongue, and gums for facial capture</p>
                     <img loading="lazy" decoding="async" src="assets/aimocap/06_blend_shapes.jpg" alt="Facial blend shapes showing six expressions: Sad, Happy, Angry, Surprise, Fear, Disgust" style="width: 100%; border-radius: 8px;" onclick="openLightbox(this.src)">
-                    <p class="process-caption">Blend shapes for ARKit-compatible facial capture</p>
+                    <p class="process-caption">Blend shapes via Advanced Skeleton base + manual tweaking for ARKit compatibility</p>
                 </div>
 
                 <div class="modal-section">
@@ -2137,6 +2043,7 @@
                         <span class="tool-tag">ChatGPT</span>
                         <span class="tool-tag">Rodin AI</span>
                         <span class="tool-tag">Maya</span>
+                        <span class="tool-tag">Advanced Skeleton</span>
                         <span class="tool-tag">Substance Painter</span>
                         <span class="tool-tag">Unreal Engine 5</span>
                         <span class="tool-tag">Rokoko</span>
@@ -2153,12 +2060,9 @@
         </button>
         <div class="modal-content">
             <div class="modal-hero portrait">
-                <div class="portrait-video-container">
-                    <iframe loading="lazy" src="https://player.vimeo.com/video/1154736103?badge=0&autopause=0&player_id=0&app_id=58479&loop=1&autoplay=1&muted=1" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-                            title="Titan Arena Demo">
-                    </iframe>
+                <!-- NEED: Video of you playing the game with voice commands -->
+                <div class="portrait-video-container" style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                    <p style="color: var(--text-muted); font-size: 14px;">NEED: Gameplay video with voice commands</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -2167,33 +2071,154 @@
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
-                        <span class="modal-meta-value">Developer</span>
+                        <span class="modal-meta-value">Solo Developer</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Context:</span>
-                        <span class="modal-meta-value">Drexel University</span>
-                    </div>
-                    <div class="modal-meta-item">
-                        <span class="modal-meta-label">Engine:</span>
-                        <span class="modal-meta-value">Unity</span>
+                        <span class="modal-meta-value">Drexel University Course Project</span>
                     </div>
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">The Challenge</p>
+                    <p class="modal-section-title">The Problem</p>
                     <p class="modal-section-content">
-                        Create a game with novel interaction that doesn't rely on traditional 
-                        controller input. Explore voice as a primary input method for real-time 
-                        gameplay.
+                        Action games demand physical dexterity—thumbstick precision, button timing, complex input combinations. This excludes players with motor impairments from an entire genre. Most accessibility solutions are post-hoc remapping that still assumes some form of manual controller use.
+                    </p>
+                    <p class="modal-section-content" style="margin-top: 12px;">
+                        The question: can voice input be a <em>primary</em> control method for real-time combat, not just an assistive add-on?
                     </p>
                 </div>
                 
                 <div class="modal-section">
-                    <p class="modal-section-title">The Solution</p>
+                    <p class="modal-section-title">The Approach</p>
                     <p class="modal-section-content">
-                        Built a robot combat game controlled entirely through voice commands. 
-                        Player issues verbal orders to their robot during battle (move, attack, 
-                        defend). Demonstrates interaction design thinking beyond traditional inputs.
+                        Design a combat game from the ground up around voice control. No button fallback, no hybrid input—if it doesn't work with voice alone, it doesn't ship. This constraint forces design decisions that prioritize accessibility rather than retrofitting it.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Voice Architecture</p>
+                    <p class="modal-section-content">
+                        Built on Windows Speech Recognition via Unity's <code style="background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px;">KeywordRecognizer</code> API. Recognition runs entirely on-device—no cloud round-trip, which keeps the input-to-action loop tight enough for real-time gameplay.
+                    </p>
+                    <!-- PLACEHOLDER: Architecture diagram showing Voice Input → KeywordRecognizer → Dictionary Lookup → Action Method → Animator Trigger, with parallel branch to AI State Machine -->
+                    <img loading="lazy" decoding="async" src="assets/robot/robot-architecture.png" alt="System architecture diagram showing voice input flow from KeywordRecognizer through dictionary dispatch to animator triggers and AI state machine" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin-top: 16px;">
+                    <p class="process-caption" style="margin-top: 8px;">Voice command flow: recognition → dispatch → animation → AI reaction</p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Accessible Vocabulary Design</p>
+                    <p class="modal-section-content">
+                        Seven commands total—small enough to memorize immediately, large enough for tactical depth. Each keyword is phonetically distinct to minimize recognition errors across accents and speech patterns.
+                    </p>
+                    <div class="results-grid" style="grid-template-columns: repeat(2, 1fr); margin-top: 16px;">
+                        <div class="result-card">
+                            <p class="result-label" style="margin-bottom: 8px; color: var(--text-primary);">Movement</p>
+                            <p style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary);">"advance" · "back" · "jump"</p>
+                        </div>
+                        <div class="result-card">
+                            <p class="result-label" style="margin-bottom: 8px; color: var(--text-primary);">Combat</p>
+                            <p style="font-family: var(--font-mono); font-size: 13px; color: var(--text-secondary);">"punch" · "kick" · "upper cut" · "block"</p>
+                        </div>
+                    </div>
+                    <p class="modal-section-content" style="margin-top: 16px; color: var(--text-muted); font-size: 13px;">
+                        No homophones, no phonetic overlap. "Advance" instead of "forward" (avoids confusion with "block"). "Upper cut" as two words for clearer recognition than "uppercut."
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Voice Control in Action</p>
+                    <div class="process-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div>
+                            <!-- NEED: Clip of "punch" command executing -->
+                            <div class="process-item" style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 200px; border-radius: 8px;">
+                                <p style="color: var(--text-muted); font-size: 14px;">NEED: Punch clip</p>
+                            </div>
+                            <p class="process-caption">"Punch" → attack executes</p>
+                        </div>
+                        <div>
+                            <!-- NEED: Clip of "block" command executing -->
+                            <div class="process-item" style="background: var(--bg-secondary); border: 1px dashed var(--bg-tertiary); display: flex; align-items: center; justify-content: center; min-height: 200px; border-radius: 8px;">
+                                <p style="color: var(--text-muted); font-size: 14px;">NEED: Block clip</p>
+                            </div>
+                            <p class="process-caption">"Block" → defensive stance</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Deliberate Pacing</p>
+                    <p class="modal-section-content">
+                        Voice input is inherently slower than button presses—there's latency from utterance to recognition to action. Instead of fighting this, the design embraces it: each command locks input until the animation completes. You commit to your action.
+                    </p>
+                    <p class="modal-section-content" style="margin-top: 12px;">
+                        This is the key accessibility insight: <strong>games that don't reward fast inputs don't penalize players who can't produce fast inputs.</strong> The result plays more like calling plays in football than twitch combat.
+                    </p>
+                    <div style="overflow-x: auto; margin-top: 16px;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Action</th>
+                                    <th style="text-align: center; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Commit Window</th>
+                                    <th style="text-align: left; padding: 12px 8px; color: var(--text-muted); font-weight: 500;">Risk/Reward</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-family: var(--font-mono);">kick</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">1.13s</td>
+                                    <td style="padding: 12px 8px; color: var(--text-muted);">Quick, low commitment</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-family: var(--font-mono);">block</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">1.49s</td>
+                                    <td style="padding: 12px 8px; color: var(--text-muted);">Defensive window</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--bg-tertiary);">
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-family: var(--font-mono);">punch</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">2.09s</td>
+                                    <td style="padding: 12px 8px; color: var(--text-muted);">Standard attack</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px 8px; color: var(--text-primary); font-family: var(--font-mono);">upper cut</td>
+                                    <td style="text-align: center; padding: 12px 8px; color: var(--text-secondary);">3.08s</td>
+                                    <td style="padding: 12px 8px; color: var(--text-muted);">High damage, punishable</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Reactive AI Opponent</p>
+                    <p class="modal-section-content">
+                        The AI runs a finite state machine that reacts to player commands. When it detects the player attacking within range, it has a 50-80% chance to block—creating the illusion of reading your voice commands.
+                    </p>
+                    <!-- PLACEHOLDER: FSM diagram showing Idle ↔ MoveForward ↔ MoveBackward ↔ Punch ↔ Block with transition conditions -->
+                    <img loading="lazy" decoding="async" src="assets/robot/robot-ai-fsm.png" alt="AI finite state machine diagram showing states (Idle, MoveForward, MoveBackward, Punch, Block) and transition conditions based on distance and player actions" style="width: 100%; border-radius: 8px; border: 1px solid var(--bg-tertiary); margin: 16px 0;">
+                    <p class="process-caption">AI state transitions based on distance and player behavior</p>
+                    <p class="modal-section-content" style="margin-top: 16px;">
+                        Distance-based logic: advances when far, retreats when close, attacks within strike range. State transitions have a 0.5s buffer to prevent erratic behavior. The AI plays by the same deliberate rules as the player—readable, tactical, fair.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Accessibility Context</p>
+                    <p class="modal-section-content">
+                        This project explores voice as a primary input method—removing the physical dexterity barrier that excludes players with motor impairments from most action games. No formal accessibility testing was conducted; this is design research into the viability of the approach, not a validated accessibility solution.
+                    </p>
+                    <p class="modal-section-content" style="margin-top: 12px;">
+                        The design aligns with industry direction: Xbox Accessibility Guidelines, PlayStation Access controller, and games like <em>The Last of Us Part II</em> proving that accessible design expands audience. Voice control remains an underexplored input modality with potential to open action games to currently excluded players.
+                    </p>
+                </div>
+                
+                <div class="modal-section">
+                    <p class="modal-section-title">Limitations</p>
+                    <p class="modal-section-content" style="color: var(--text-muted);">
+                        <strong style="color: var(--text-secondary);">Platform:</strong> Windows only—KeywordRecognizer wraps Windows Speech Recognition, unavailable on Mac/Linux/WebGL.<br><br>
+                        <strong style="color: var(--text-secondary);">Recognition:</strong> Keyword grammar (fixed vocabulary), not continuous dictation. No confidence thresholds or misrecognition feedback implemented.<br><br>
+                        <strong style="color: var(--text-secondary);">Validation:</strong> No formal latency measurement, recognition accuracy testing, or accessibility user testing conducted. This is a design prototype, not a production-validated system.<br><br>
+                        <strong style="color: var(--text-secondary);">Scope:</strong> Proof-of-concept exploring voice-as-primary-input for accessible action games.
                     </p>
                 </div>
                 
@@ -2201,8 +2226,11 @@
                     <p class="modal-section-title">Tools</p>
                     <div class="tools-list">
                         <span class="tool-tag">Unity</span>
-                        <span class="tool-tag">Voice Recognition API</span>
+                        <span class="tool-tag">Windows Speech Recognition</span>
+                        <span class="tool-tag">KeywordRecognizer API</span>
                         <span class="tool-tag">C#</span>
+                        <span class="tool-tag">Finite State Machine</span>
+                        <span class="tool-tag">Mecanim</span>
                     </div>
                 </div>
             </div>
@@ -2258,16 +2286,16 @@
                 </video>
             </div>
             <div class="modal-body">
-                <h2 class="modal-title">Real-Time Visualization Pipeline</h2>
+                <h2 class="modal-title">Public Sculpture Visualization</h2>
                 
                 <div class="modal-meta">
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Role:</span>
-                        <span class="modal-meta-value">Technical Artist / Pipeline Developer</span>
+                        <span class="modal-meta-value">Visualization Artist</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Client:</span>
-                        <span class="modal-meta-value">Studio Projects</span>
+                        <span class="modal-meta-value">Studio Projects LLC</span>
                     </div>
                     <div class="modal-meta-item">
                         <span class="modal-meta-label">Status:</span>
@@ -2278,11 +2306,14 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Technical Challenge</p>
                     <p class="modal-section-content">
-                        Built a real-time visualization pipeline for architectural review. Integrated 
-                        Google 3D Tiles via Cesium for accurate geospatial site placement in downtown 
-                        Burlington. Developed day/night lighting system with UE5 path tracing to show 
-                        how the sculpture would interact with actual environmental lighting conditions. 
-                        Pipeline enabled rapid iteration during city council presentation.
+                        Received a rough 3D model from the sculptor (extruded Illustrator paths) and cleaned it up 
+                        in Maya for rendering. Created a real-time visualization for architectural review. Integrated 
+                        Google 3D Tiles via Cesium for accurate geospatial site placement in downtown Burlington. 
+                        Kit bashed street assets to match the actual location and reconstructed the background building 
+                        from concept photos. Captured Rokoko mocap driving a MetaHuman for scale reference. Developed 
+                        day/night lighting with UE5 path tracing to show how the sculpture would interact with actual 
+                        environmental lighting conditions. Proposed interactive lighting that activates as pedestrians 
+                        walk past (shown in visualization, not implemented in final build).
                     </p>
                 </div>
                 
@@ -2319,6 +2350,8 @@
                         <span class="tool-tag">Path Tracing</span>
                         <span class="tool-tag">Cesium for Unreal</span>
                         <span class="tool-tag">Google 3D Tiles</span>
+                        <span class="tool-tag">MetaHuman</span>
+                        <span class="tool-tag">Rokoko</span>
                         <span class="tool-tag">Maya</span>
                         <span class="tool-tag">Substance Painter</span>
                     </div>
@@ -2368,9 +2401,10 @@
                     <p class="modal-section-content">
                         Graphic designer working on a VictorVictor × Nike footwear collaboration 
                         needed to evaluate designs before production. 2D mockups weren't representing 
-                        material behavior accurately. Created photorealistic 3D renders showing 
-                        materials (leather, mesh, rubber, metallic elements) from multiple angles 
-                        for internal design review.
+                        material behavior accurately. Modeled custom logo geometry, UV unwrapped, 
+                        textured in Substance Painter, built materials, and lit/rendered in UE5 to create 
+                        photorealistic renders showing materials (leather, mesh, rubber, metallic elements) 
+                        from multiple angles for internal design review.
                     </p>
                 </div>
                 
@@ -2407,7 +2441,7 @@
                 <div class="modal-section">
                     <p class="modal-section-title">Asset Credit</p>
                     <p class="modal-section-content" style="font-size: 13px;">
-                        Base shoe model: <a href="https://www.cgtrader.com/3d-models/character/clothing/air-force-1-low-nike-pbr" target="_blank" style="color: var(--accent-primary);">Air Force 1 Low Nike PBR</a> by aimadbro (CGTrader). Texturing, materials, lighting, and rendering by Tyler Varacchi.
+                        Base shoe model: <a href="https://www.cgtrader.com/3d-models/character/clothing/air-force-1-low-nike-pbr" target="_blank" style="color: var(--accent-primary);">Air Force 1 Low Nike PBR</a> by aimadbro (CGTrader).
                     </p>
                 </div>
             </div>
@@ -2594,5 +2628,26 @@
         </button>
         <img id="lightbox-img" src="" alt="Enlarged view">
     </div>
+    
+    <!-- Copy email function -->
+    <script>
+        function copyEmail() {
+            const email = 'tylervaracchi@gmail.com';
+            const btn = document.getElementById('email-btn');
+            const text = document.getElementById('email-text');
+            
+            navigator.clipboard.writeText(email).then(function() {
+                text.textContent = 'Copied!';
+                btn.style.borderColor = 'var(--accent-success)';
+                btn.style.color = 'var(--accent-success)';
+                
+                setTimeout(function() {
+                    text.textContent = 'Email';
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
